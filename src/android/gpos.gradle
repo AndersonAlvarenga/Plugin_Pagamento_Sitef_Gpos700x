@@ -27,5 +27,6 @@ dependencies {
     // Lib exclusiva para o GPOS700
     implementation(name: 'payment-1.14.10.181016', ext: 'aar')
     implementation(name: 'clisitef-android',ext: 'jar')
+    implementation(name: 'clisitef',ext: 'jar')
 
 }
