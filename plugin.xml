@@ -40,7 +40,7 @@
         <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/jniLibs" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/libs/jniLibs" target-dir="src/android/libs" />
 
         
         <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
