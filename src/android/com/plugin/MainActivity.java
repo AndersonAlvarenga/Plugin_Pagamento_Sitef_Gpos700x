@@ -90,7 +90,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         gertecPrinter.setConfigImpressao(configPrint);
-        this.cliSiTef = new CliSiTef(getApplicationContext());
+        this.cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
         this.cliSiTef.setMessageHandler(hndMessage);
 
     }
