@@ -35,14 +35,7 @@ import org.json.JSONException;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
-//Imports Clisitef
-import br.com.softwareexpress.sitef.android.CliSiTef;
-import br.com.softwareexpress.sitef.android.CliSiTefI;
-import br.com.softwareexpress.sitef.android.ICliSiTefListener;
-import android.os.Handler;
-
-//---------------------------------------------------------
-public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
+public class MainActivity extends CordovaPlugin {
 
     public static final String G700 = "GPOS700";
     public static final String G800 = "Smart G800";
@@ -64,71 +57,18 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private Intent intent;
     private int pulaLinha;
 
-    //variaveis Clisitef
-    private CliSiTef cliSiTef;
-    private int trnResultCode;
-    private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
-    private static final int CAMPO_COMPROVANTE_ESTAB = 122;
-    private static int REQ_CODE = 4321;
-    private static String title;
-    private static MainActivity instance;
-    private class RequestCode {
-        private static final int GET_DATA = 1;
-        private static final int END_STAGE_1_MSG = 2;
-        private static final int END_STAGE_2_MSG = 3;
-    }
-
-    //-------------------------
-
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         gertecPrinter.setConfigImpressao(configPrint);
-        this.cliSiTef = new CliSiTef(getApplicationContext());
-        this.cliSiTef.setMessageHandler(hndMessage);
-
     }
 
     public MainActivity() {
         super();
     }
 
-    private static Handler hndMessage = new Handler() {
-        public void handleMessage(android.os.Message message) {
-            switch (message.what) {
-                case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Ativando BT");
-                    break;
-                case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("PinPad");
-                    break;
-                case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Aguardando pinpad");
-                    break;
-                case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("");
-                    break;
-                case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Configurando pinpad");
-                    break;
-                case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad configurado");
-                    break;
-                case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad desconectado");
-                    break;
-            }
-        }
-    };
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Context context = cordova.getActivity().getApplicationContext();
@@ -311,11 +251,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
-
-    //metodo Clisitef
-
-
-    //__________________________________________________________________________
     private void startCamera() {
         cordova.setActivityResultCallback(this);
         qrScan = new IntentIntegrator(cordova.getActivity());

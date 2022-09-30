@@ -12,9 +12,6 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
     }
-    packagingOptions{
-        doNotStrip "**/libclisitef.so"
-    }
 }
 
 dependencies {
@@ -28,7 +25,5 @@ dependencies {
     
     // Lib exclusiva para o GPOS700
     implementation(name: 'payment-1.14.10.181016', ext: 'aar')
-    implementation files('libs/clisitef-android.jar')
-
 
 }
