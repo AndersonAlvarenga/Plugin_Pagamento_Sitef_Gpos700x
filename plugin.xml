@@ -40,6 +40,8 @@
         <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/jniLibs" target-dir="src/android/com/plugin" />
+
         
         <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
         <source-file src="src/android/res/layout/codigo_barras2.xml" target-dir="res/layout"/>
