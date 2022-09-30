@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin id="cordova-plugin-gpos7centos" 
+    version="0.0.1" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>gpos7centos</name>
+
+    <!-- módulos js previnem de ter que inserir um <asset> pra cada arquivo js que eu tiver -->
+    <js-module name="main" src="www/main.js">
+        <clobbers target="cordova.plugins.gpos7centos" />
+        <!-- posso ter quantos clobbers eu quiser, pode ser instalado no objeto window e ser chamado atraves de 
+            window.cordova.plugins.NomeDoPlugin -->
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <!-- The service name should match the one used in the JavaScript exec call, and the value is the Java classes full name, including the namespace. 
+                Otherwise the plugin may compile but still be unreachable by Cordova. -->
+            <feature name="MainActivity">
+                <param name="android-package" value="com.plugin.MainActivity" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCGedi"></activity>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCId"></activity>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.CodigoBarras2"></activity>
+        </config-file>
+
+        <!-- executable source code > -->
+        <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/ConfigPrint.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/GertecPrinter.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/CodigoBarras2.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
+        
+        <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/codigo_barras2.xml" target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/nfcid.xml" target-dir="res/layout"/>
+        <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.NFC" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+            <uses-feature android:name="android.hardware.camera" />
+            <uses-feature android:name="android.hardware.camera.autofocus" />
+        </config-file>
+
+        <!-- <config-file parent="/*" target="AndroidManifest.xml"></config-file> -->
+        <framework src="src/android/gpos.gradle" custom="true" type="gradleReference" />
+        <resource-file src="src/android/libs/payment-1.14.10.181016.aar" target="libs/payment-1.14.10.181016.aar" />
+        <resource-file src="src/android/assets/fonts/VECTRA.otf" target="assets/fonts/VECTRA.otf" />
+        <resource-file src="src/android/res/raw/beep.ogg" target="res/raw/beep.ogg" />
+        <!-- Drawable -->
+        <resource-file src="src/android/res/drawable/logogertec.png" target="res/drawable/logogertec.png" />
+        <resource-file src="src/android/res/drawable/gertec_2.jpg" target="res/drawable/gertec_2.jpg" />
+        <resource-file src="src/android/res/drawable/invoice.png" target="res/drawable/invoice.png" />
+    </platform>
+</plugin>
+
