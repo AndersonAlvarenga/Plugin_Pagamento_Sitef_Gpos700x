@@ -312,7 +312,22 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             });
             return true;
         }
-
+        if (action.equals("pagamento")) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    intent = null;
+                    try {
+                        intent = new Intent(context, Pagamento.class);
+                        intent.putExtra("title", "Pagamento");
+                        cordova.getActivity().startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
