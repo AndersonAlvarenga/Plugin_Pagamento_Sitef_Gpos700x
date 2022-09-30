@@ -69,6 +69,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     //Variavais Clisitef
     //-----------------------------------------------------------------
+    private CliSiTef cliSiTef;
     private int trnResultCode;
     private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
     private static final int CAMPO_COMPROVANTE_ESTAB = 122;
@@ -82,7 +83,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     }
     //-----------------------------------------------------------------
 
-    
+
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
@@ -585,7 +586,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         } else {
 
             if (resultCode == 0) {
-                finish();
+                //]~estava Finalziado
             } else {
 
             }
