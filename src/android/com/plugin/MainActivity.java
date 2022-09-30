@@ -103,32 +103,32 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         public void handleMessage(android.os.Message message) {
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Ativando BT");
+                    //instance.setProgressBarIndeterminateVisibility(true);
+                    //instance.setTitle("Ativando BT");
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("PinPad");
+                    //instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setTitle("PinPad");
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Aguardando pinpad");
+                   // instance.setProgressBarIndeterminateVisibility(true);
+                   // instance.setTitle("Aguardando pinpad");
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("");
+                   // instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setTitle("");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                    instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Configurando pinpad");
+                   // instance.setProgressBarIndeterminateVisibility(true);
+                   // instance.setTitle("Configurando pinpad");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad configurado");
+                   // instance.setProgressBarIndeterminateVisibility(false);
+                   // instance.setTitle("Pinpad configurado");
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad desconectado");
+                   // instance.setProgressBarIndeterminateVisibility(false);
+                   // instance.setTitle("Pinpad desconectado");
                     break;
             }
         }
