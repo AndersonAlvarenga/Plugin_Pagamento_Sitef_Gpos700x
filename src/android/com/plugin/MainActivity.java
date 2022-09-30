@@ -35,7 +35,17 @@ import org.json.JSONException;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
-public class MainActivity extends CordovaPlugin {
+//Imports Clisitef
+//---------------------------------------------------------------
+
+import br.com.softwareexpress.sitef.android.CliSiTef;
+import br.com.softwareexpress.sitef.android.CliSiTefI;
+import br.com.softwareexpress.sitef.android.ICliSiTefListener;
+import android.os.Handler;
+import android.util.Log;
+
+//---------------------------------------------------------------
+public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     public static final String G700 = "GPOS700";
     public static final String G800 = "Smart G800";
@@ -57,6 +67,22 @@ public class MainActivity extends CordovaPlugin {
     private Intent intent;
     private int pulaLinha;
 
+    //Variavais Clisitef
+    //-----------------------------------------------------------------
+    private int trnResultCode;
+    private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
+    private static final int CAMPO_COMPROVANTE_ESTAB = 122;
+    private static int REQ_CODE = 4321;
+    private static String title;
+    private static MainActivity instance;
+    private class RequestCode {
+        private static final int GET_DATA = 1;
+        private static final int END_STAGE_1_MSG = 2;
+        private static final int END_STAGE_2_MSG = 3;
+    }
+    //-----------------------------------------------------------------
+
+    
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
@@ -452,4 +478,118 @@ public class MainActivity extends CordovaPlugin {
         }
         this.tipo = null;
     }
+
+
+    public void onData(int stage, int command, int fieldId, int minLength, int maxLength, byte[] input) {
+        String data = "";
+
+
+        if (stage == 1) {
+            // Evento onData recebido em uma startTransaction
+        } else if (stage == 2) {
+            // Evento onData recebido em uma finishTransaction
+        }
+
+        switch (command) {
+            case CliSiTef.CMD_RESULT_DATA:
+                switch (fieldId) {
+                    case CAMPO_COMPROVANTE_CLIENTE:
+                        Log.i("CAMPO_COMPROVANTE_CLIENTE","CAMPO_COMPROVANTE_CLIENTE");
+                    case CAMPO_COMPROVANTE_ESTAB:
+                        Log.i("CAMPO_COMPROVANTE_ESTAB","CAMPO_COMPROVANTE_ESTAB");
+                        //alert(this.cliSiTef.getBuffer());
+                }
+                break;
+            case CliSiTef.CMD_SHOW_MSG_CASHIER:
+            case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
+            case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
+                Log.i("OnData","CMD_SHOW_MSG_CASHIER_CUSTOMER");
+                //setStatus(this.cliSiTef.getBuffer());
+                break;
+            case CliSiTef.CMD_SHOW_MENU_TITLE:
+            case CliSiTef.CMD_SHOW_HEADER:
+                //Primiro Entrada
+                //title = this.cliSiTef.getBuffer();
+                Log.i("OnData","CMD_SHOW_HEADER");
+                break;
+            case CliSiTef.CMD_CLEAR_MSG_CASHIER:
+            case CliSiTef.CMD_CLEAR_MSG_CUSTOMER:
+            case CliSiTef.CMD_CLEAR_MSG_CASHIER_CUSTOMER:
+            case CliSiTef.CMD_CLEAR_MENU_TITLE:
+            case CliSiTef.CMD_CLEAR_HEADER:
+                Log.i("OnData","CMD_CLEAR_HEADER");
+               // this.setStatus("");
+               // title = "";
+                break;
+            case CliSiTef.CMD_CONFIRM_GO_BACK:
+            case CliSiTef.CMD_CONFIRMATION: {
+                Log.i("OnData","CMD_CONFIRMATION");
+                //Intent i = new Intent(this, yesno.class);
+               // i.putExtra("title", title);
+                //i.putExtra("message", this.cliSiTef.getBuffer());
+                //starActivityForResult.launch(i);
+
+                return;
+            }
+            case CliSiTef.CMD_GET_FIELD_CURRENCY:
+            case CliSiTef.CMD_GET_FIELD_BARCODE:
+            case CliSiTef.CMD_GET_FIELD: {
+                Log.i("OnData","CMD_GET_FIELD");
+               // Intent i = new Intent(this, Dialog.class);
+               // i.putExtra("title", title);
+               // i.putExtra("message", this.cliSiTef.getBuffer());
+               // i.putExtra("request",RequestCode.GET_DATA);
+               // starActivityForResult.launch(i);
+                return;
+            }
+            case CliSiTef.CMD_GET_MENU_OPTION: {
+                //Segunda entrada
+                Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
+              //  Intent i = new Intent(this, Itens.class);
+             //   i.putExtra("title", title);
+               // i.putExtra("message", this.cliSiTef.getBuffer());
+              //  i.putExtra("request",RequestCode.GET_DATA);
+              //  starActivityForResult.launch(i);
+              //  System.out.println(this.cliSiTef.getBuffer());
+                return;
+            }
+            case CliSiTef.CMD_PRESS_ANY_KEY: {
+                Log.i("OnData","CMD_PRESS_ANY_KEY");
+             //   Intent i = new Intent(this, mensagem.class);
+              //  i.putExtra("message", this.cliSiTef.getBuffer());
+              //  starActivityForResult.launch(i);
+                return;
+            }
+            case CliSiTef.CMD_ABORT_REQUEST:
+                Log.i("OnData","CMD_ABORT_REQUEST");
+                break;
+            default:
+                Log.i("default","default");
+                break;
+        }
+
+
+        this.cliSiTef.continueTransaction(data);
+    }
+
+    @Override
+    public void onTransactionResult(int stage, int resultCode) {
+       // trnResultCode = resultCode;
+        //alert ("Fim do estágio " + stage + ", retorno " + resultCode);
+        if (stage == 1 && resultCode == 0) { // Confirm the transaction
+            try {
+                this.cliSiTef.finishTransaction(1);
+            } catch (Exception e) {
+                //alert(e.getMessage());
+            }
+        } else {
+
+            if (resultCode == 0) {
+                finish();
+            } else {
+
+            }
+        }
+    }
+
 }
