@@ -27,3 +27,6 @@ exports.leitorNfcGedi = function (success, error) {
 exports.leitorNfcId = function (success, error) {
     exec(success, error, 'MainActivity', 'leitorNfcId');
 };
+exports.pagamento = function (success, error) {
+    exec(success, error, 'MainActivity', 'pagamento');
+};
