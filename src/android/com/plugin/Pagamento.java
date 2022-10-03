@@ -15,8 +15,7 @@ import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+
 
 
 
@@ -224,24 +223,5 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         }
     }
 
-    ActivityResultLauncher<Intent> starActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result ->{
-                int code = result.getResultCode();
-                switch (code){
-                    case Activity.RESULT_OK:
-                        if(result.getData().getStringExtra("input")!=null){
-                            String returnClassItens = result.getData().getStringExtra("input");
-                            this.cliSiTef.continueTransaction(returnClassItens);
-                        }
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        int i = this.cliSiTef.abortTransaction(-1);
-                        break;
-                    default:
-                        break;
-                }
 
-            }
-    );
 }
