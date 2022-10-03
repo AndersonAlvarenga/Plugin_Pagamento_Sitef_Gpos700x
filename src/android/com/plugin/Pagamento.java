@@ -37,7 +37,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
     private TextView text;
     private int id;
 
-
+     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
