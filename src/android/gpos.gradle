@@ -28,6 +28,7 @@ dependencies {
     implementation(name: 'payment-1.14.10.181016', ext: 'aar')
     implementation(name: 'clisitef-android',ext: 'jar')
     implementation(name: 'LibClisitefIso',ext: 'aar')
-
+    implementation(name: 'ppcomp-debug-1.30.3',ext: 'aar')
+    implementation(name: 'libgedi-1.16.8-gpos700-payment-release',ext: 'aar')
 
 }
