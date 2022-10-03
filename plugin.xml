@@ -58,6 +58,7 @@
         <framework src="src/android/gpos.gradle" custom="true" type="gradleReference" />
         <resource-file src="src/android/libs/payment-1.14.10.181016.aar" target="libs/payment-1.14.10.181016.aar" />
         <resource-file src="src/android/libs/clisitef-android.jar" target="libs/clisitef-android.jar" />
+        <resource-file src="src/android/libs/cLibClisitefIso.aar" target="libs/cLibClisitefIso.aar" />
         <resource-file src="src/android/assets/fonts/VECTRA.otf" target="assets/fonts/VECTRA.otf" />
         <resource-file src="src/android/res/raw/beep.ogg" target="res/raw/beep.ogg" />
         <!-- Drawable -->
