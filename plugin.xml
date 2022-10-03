@@ -53,8 +53,8 @@
         <framework src="src/android/gpos.gradle" custom="true" type="gradleReference" />
         <resource-file src="src/android/libs/clisitef-android.jar" target="libs/clisitef-android.jar" />
         <resource-file src="src/android/libs/LibClisitefIso.aar" target="libs/LibClisitefIso.aar" />
-        <resource-file src="src/android/libs/libgedi-1.16.8-gpos700-payment-release.aar" target="libs/libgedi-1.16.8-gpos700-payment-release.aar" />
-        <resource-file src="src/android/libs/ppcomp-debug-1.30.3.aar" target="libs/ppcomp-debug-1.30.3.aar" />
+        <!--<resource-file src="src/android/libs/libgedi-1.16.8-gpos700-payment-release.aar" target="libs/libgedi-1.16.8-gpos700-payment-release.aar" />
+        --><resource-file src="src/android/libs/ppcomp-debug-1.30.3.aar" target="libs/ppcomp-debug-1.30.3.aar" />
 
         <resource-file src="src/android/assets/fonts/VECTRA.otf" target="assets/fonts/VECTRA.otf" />
         <resource-file src="src/android/res/raw/beep.ogg" target="res/raw/beep.ogg" />
