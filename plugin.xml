@@ -31,6 +31,9 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.CodigoBarras2"></activity>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.Pagamento"></activity>
+        </config-file>
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
