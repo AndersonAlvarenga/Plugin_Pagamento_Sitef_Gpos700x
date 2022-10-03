@@ -6,6 +6,20 @@ repositories {
         dirs 'src/main/libs'
     }
 }
+buildTypes {
+    release {
+        // blah blah
+        matchingFallbacks = ['release']
+    }
+    enterprise {
+        // blah blah
+        matchingFallbacks = ['release']
+    }
+    debug {
+        // blah blah
+        matchingFallbacks = ['debug']
+    }
+}
 
 android {
     packagingOptions {

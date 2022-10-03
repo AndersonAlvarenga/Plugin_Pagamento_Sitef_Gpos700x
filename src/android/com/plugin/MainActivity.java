@@ -80,7 +80,7 @@ public class MainActivity extends CordovaPlugin{
                 public void run() {
                     intent = null;
                     try {
-                        
+
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
