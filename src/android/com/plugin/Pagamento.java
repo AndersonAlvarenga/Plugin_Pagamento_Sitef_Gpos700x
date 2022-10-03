@@ -18,10 +18,7 @@ public class Pagamento extends Activity{
         setContentView(getApplication().getResources().getIdentifier("pagamento", "layout", package_name));
     }
 
-    /*
-     * Trecho principal pra ligar o NFC
-     * Caso não exista esse código dentro do onStart, a NFC não vai funcionar.
-     * */
+
     @Override
     protected void onStart() {
         super.onStart();

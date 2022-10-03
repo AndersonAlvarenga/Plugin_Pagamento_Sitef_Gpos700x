@@ -45,7 +45,7 @@ import android.os.Handler;
 import android.util.Log;
 
 //---------------------------------------------------------------
-public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
+public class MainActivity extends CordovaPlugin{
 
     public static final String G700 = "GPOS700";
     public static final String G800 = "Smart G800";
@@ -90,8 +90,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         gertecPrinter.setConfigImpressao(configPrint);
-        this.cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
-        this.cliSiTef.setMessageHandler(hndMessage);
 
     }
 
@@ -99,40 +97,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         super();
     }
 
-    private static Handler hndMessage = new Handler() {
-        public void handleMessage(android.os.Message message) {
-            switch (message.what) {
-                case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    //instance.setProgressBarIndeterminateVisibility(true);
-                    //instance.setTitle("Ativando BT");
-                    break;
-                case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    //instance.setProgressBarIndeterminateVisibility(false);
-                    //instance.setTitle("PinPad");
-                    break;
-                case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                   // instance.setProgressBarIndeterminateVisibility(true);
-                   // instance.setTitle("Aguardando pinpad");
-                    break;
-                case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                   // instance.setProgressBarIndeterminateVisibility(false);
-                    //instance.setTitle("");
-                    break;
-                case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                   // instance.setProgressBarIndeterminateVisibility(true);
-                   // instance.setTitle("Configurando pinpad");
-                    break;
-                case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                   // instance.setProgressBarIndeterminateVisibility(false);
-                   // instance.setTitle("Pinpad configurado");
-                    break;
-                case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                   // instance.setProgressBarIndeterminateVisibility(false);
-                   // instance.setTitle("Pinpad desconectado");
-                    break;
-            }
-        }
-    };
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -318,7 +282,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                     intent = null;
                     try {
                         intent = new Intent(context, Pagamento.class);
-                        intent.putExtra("title", "Pagamento");
                         cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -328,6 +291,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             });
             return true;
         }
+
+
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
@@ -486,164 +451,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        JSONObject resultadoJson = new JSONObject();
-        if (intentResult != null) {
-            //if qrcode has nothing in it
-            if (intentResult.getContents() == null) {
-                try {
-                    if(this.tipo != null) {
-                        resultadoJson.put("Formato", this.tipo);
-                    }
-                    resultadoJson.put("Resultado", "Não foi possível ler o código");
-                    scancallbackContext.error(resultadoJson);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                //if qr contains data
-                try {
-                    if(this.tipo != null) {
-                        resultadoJson.put("Formato", this.tipo);
-                        resultadoJson.put("Resultado", intentResult.getContents());
-                    } else {
-                        resultadoJson.put("Formato", data.getStringExtra("SCAN_RESULT_FORMAT"));
-                        resultadoJson.put("Resultado", data.getStringExtra("SCAN_RESULT"));
-                    }
-                    scancallbackContext.success(resultadoJson);
-                    
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-            try {
-                if(this.tipo != null) {
-                    resultadoJson.put("Formato", this.tipo);
-                }
-                resultadoJson.put("Resultado", "Não foi possível fazer a leitura");
-                scancallbackContext.error(resultadoJson);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        this.tipo = null;
-    }
 
-
-    public void onData(int stage, int command, int fieldId, int minLength, int maxLength, byte[] input) {
-        String data = "";
-
-
-        if (stage == 1) {
-            // Evento onData recebido em uma startTransaction
-        } else if (stage == 2) {
-            // Evento onData recebido em uma finishTransaction
-        }
-
-        switch (command) {
-            case CliSiTef.CMD_RESULT_DATA:
-                switch (fieldId) {
-                    case CAMPO_COMPROVANTE_CLIENTE:
-                        Log.i("CAMPO_COMPROVANTE_CLIENTE","CAMPO_COMPROVANTE_CLIENTE");
-                    case CAMPO_COMPROVANTE_ESTAB:
-                        Log.i("CAMPO_COMPROVANTE_ESTAB","CAMPO_COMPROVANTE_ESTAB");
-                        //alert(this.cliSiTef.getBuffer());
-                }
-                break;
-            case CliSiTef.CMD_SHOW_MSG_CASHIER:
-            case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
-            case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
-                Log.i("OnData","CMD_SHOW_MSG_CASHIER_CUSTOMER");
-                //setStatus(this.cliSiTef.getBuffer());
-                break;
-            case CliSiTef.CMD_SHOW_MENU_TITLE:
-            case CliSiTef.CMD_SHOW_HEADER:
-                //Primiro Entrada
-                //title = this.cliSiTef.getBuffer();
-                Log.i("OnData","CMD_SHOW_HEADER");
-                break;
-            case CliSiTef.CMD_CLEAR_MSG_CASHIER:
-            case CliSiTef.CMD_CLEAR_MSG_CUSTOMER:
-            case CliSiTef.CMD_CLEAR_MSG_CASHIER_CUSTOMER:
-            case CliSiTef.CMD_CLEAR_MENU_TITLE:
-            case CliSiTef.CMD_CLEAR_HEADER:
-                Log.i("OnData","CMD_CLEAR_HEADER");
-               // this.setStatus("");
-               // title = "";
-                break;
-            case CliSiTef.CMD_CONFIRM_GO_BACK:
-            case CliSiTef.CMD_CONFIRMATION: {
-                Log.i("OnData","CMD_CONFIRMATION");
-                //Intent i = new Intent(this, yesno.class);
-               // i.putExtra("title", title);
-                //i.putExtra("message", this.cliSiTef.getBuffer());
-                //starActivityForResult.launch(i);
-
-                return;
-            }
-            case CliSiTef.CMD_GET_FIELD_CURRENCY:
-            case CliSiTef.CMD_GET_FIELD_BARCODE:
-            case CliSiTef.CMD_GET_FIELD: {
-                Log.i("OnData","CMD_GET_FIELD");
-               // Intent i = new Intent(this, Dialog.class);
-               // i.putExtra("title", title);
-               // i.putExtra("message", this.cliSiTef.getBuffer());
-               // i.putExtra("request",RequestCode.GET_DATA);
-               // starActivityForResult.launch(i);
-                return;
-            }
-            case CliSiTef.CMD_GET_MENU_OPTION: {
-                //Segunda entrada
-                Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
-              //  Intent i = new Intent(this, Itens.class);
-             //   i.putExtra("title", title);
-               // i.putExtra("message", this.cliSiTef.getBuffer());
-              //  i.putExtra("request",RequestCode.GET_DATA);
-              //  starActivityForResult.launch(i);
-              //  System.out.println(this.cliSiTef.getBuffer());
-                return;
-            }
-            case CliSiTef.CMD_PRESS_ANY_KEY: {
-                Log.i("OnData","CMD_PRESS_ANY_KEY");
-             //   Intent i = new Intent(this, mensagem.class);
-              //  i.putExtra("message", this.cliSiTef.getBuffer());
-              //  starActivityForResult.launch(i);
-                return;
-            }
-            case CliSiTef.CMD_ABORT_REQUEST:
-                Log.i("OnData","CMD_ABORT_REQUEST");
-                break;
-            default:
-                Log.i("default","default");
-                break;
-        }
-
-
-        this.cliSiTef.continueTransaction(data);
-    }
-
-    @Override
-    public void onTransactionResult(int stage, int resultCode) {
-       // trnResultCode = resultCode;
-        //alert ("Fim do estágio " + stage + ", retorno " + resultCode);
-        if (stage == 1 && resultCode == 0) { // Confirm the transaction
-            try {
-                this.cliSiTef.finishTransaction(1);
-            } catch (Exception e) {
-                //alert(e.getMessage());
-            }
-        } else {
-
-            if (resultCode == 0) {
-                //]~estava Finalziado
-            } else {
-
-            }
-        }
-    }
 
 }
