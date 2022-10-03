@@ -16,6 +16,7 @@ import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import java.awt.print.Pageable;
 
