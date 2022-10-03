@@ -18,7 +18,6 @@ import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
-import java.awt.print.Pageable;
 
 
 public class Pagamento extends Activity implements ICliSiTefListener{
