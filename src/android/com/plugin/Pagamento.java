@@ -34,6 +34,8 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         private static final int END_STAGE_1_MSG = 2;
         private static final int END_STAGE_2_MSG = 3;
     }
+    private TextView text;
+    private int id;
 
 
     @Override
@@ -41,9 +43,15 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
         setContentView(getApplication().getResources().getIdentifier("pagamento", "layout", package_name));
+        id = getResources().getIdentifier("textStatus","id",package_name);
+        text = (TextView)findViewById(id);
         try{
             this.cliSiTef = new CliSiTef(getApplicationContext());
             this.cliSiTef.setMessageHandler(hndMessage);
+            this.cliSiTef.setDebug(true);
+            int idConfig = this.cliSiTef.configure("10.0.213.78", "00000000", "pdvrd.90","TipoPinPad=Android_AUTO");
+            this.cliSiTef.setActivity(this);
+            int i = this.cliSiTef.startTransaction(this,110,"12","123456","20120514","120000","Teste","");
 
         }catch (Exception e){
             Log.i("Erro",e.getMessage());
@@ -55,31 +63,31 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
                     instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Ativando BT");
+                    instance.setStatus("Ativando BT");
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
                     instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("PinPad");
+                    instance.setStatus("PinPad");
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
                     instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Aguardando pinpad");
+                    instance.setStatus("Aguardando pinpad");
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
                     instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("");
+                    instance.setStatus("");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
                     instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setTitle("Configurando pinpad");
+                    instance.setStatus("Configurando pinpad");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
                     instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad configurado");
+                    instance.setStatus("Pinpad configurado");
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
                     instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setTitle("Pinpad desconectado");
+                    instance.setStatus("Pinpad desconectado");
                     break;
             }
         }
@@ -197,7 +205,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         this.cliSiTef.continueTransaction(data);
     }
     private void setStatus(String s){
-        //
+        text.setText(s);
     }
     private void alert(String message) {
         String mensagem = message;
