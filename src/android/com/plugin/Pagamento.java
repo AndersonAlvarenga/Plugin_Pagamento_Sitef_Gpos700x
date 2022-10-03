@@ -15,6 +15,9 @@ import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
+import androidx.activity.result.ActivityResultLauncher;
+
+import java.awt.print.Pageable;
 
 
 public class Pagamento extends Activity implements ICliSiTefListener{
@@ -26,7 +29,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
     private static final int CAMPO_COMPROVANTE_ESTAB = 122;
     private static int REQ_CODE = 4321;
     private static String title;
-    private static MainActivity instance;
+    private static Pagamento instance;
     private class RequestCode {
         private static final int GET_DATA = 1;
         private static final int END_STAGE_1_MSG = 2;
