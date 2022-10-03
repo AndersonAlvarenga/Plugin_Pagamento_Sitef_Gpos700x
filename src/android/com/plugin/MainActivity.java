@@ -35,14 +35,6 @@ import org.json.JSONException;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
-//Imports Clisitef
-//---------------------------------------------------------------
-
-import br.com.softwareexpress.sitef.android.CliSiTef;
-import br.com.softwareexpress.sitef.android.CliSiTefI;
-import br.com.softwareexpress.sitef.android.ICliSiTefListener;
-import android.os.Handler;
-import android.util.Log;
 
 //---------------------------------------------------------------
 public class MainActivity extends CordovaPlugin{
@@ -64,21 +56,6 @@ public class MainActivity extends CordovaPlugin{
     private Intent intent;
     private int pulaLinha;
 
-    //Variavais Clisitef
-    //-----------------------------------------------------------------
-    private CliSiTef cliSiTef;
-    private int trnResultCode;
-    private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
-    private static final int CAMPO_COMPROVANTE_ESTAB = 122;
-    private static int REQ_CODE = 4321;
-    private static String title;
-    private static MainActivity instance;
-    private class RequestCode {
-        private static final int GET_DATA = 1;
-        private static final int END_STAGE_1_MSG = 2;
-        private static final int END_STAGE_2_MSG = 3;
-    }
-    //-----------------------------------------------------------------
 
 
     @Override
@@ -103,8 +80,7 @@ public class MainActivity extends CordovaPlugin{
                 public void run() {
                     intent = null;
                     try {
-                        intent = new Intent(context, Pagamento.class);
-                        cordova.getActivity().startActivity(intent);
+                        
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());

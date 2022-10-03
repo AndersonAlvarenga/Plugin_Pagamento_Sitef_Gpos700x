@@ -37,11 +37,6 @@
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
-
-
-        <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
-
 
         <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />
@@ -51,9 +46,6 @@
 
         <!-- <config-file parent="/*" target="AndroidManifest.xml"></config-file> -->
         <framework src="src/android/gpos.gradle" custom="true" type="gradleReference" />
-        <resource-file src="src/android/libs/app-debug.aar" target="libs/app-debug.aar" />
-
-        <resource-file src="src/android/libs/libgedi-1.16.8-gpos700-payment-release.aar" target="libs/libgedi-1.16.8-gpos700-payment-release.aar" />
         <resource-file src="src/android/libs/ppcomp-debug-1.30.3.aar" target="libs/ppcomp-debug-1.30.3.aar" />
 
         <resource-file src="src/android/assets/fonts/VECTRA.otf" target="assets/fonts/VECTRA.otf" />
