@@ -37,17 +37,9 @@
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/ConfigPrint.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/GertecPrinter.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/CodigoBarras2.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
 
-        
-        <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/codigo_barras2.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/nfcid.xml" target-dir="res/layout"/>
+
         <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
 
 
