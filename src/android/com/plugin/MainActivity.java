@@ -85,9 +85,6 @@ public class MainActivity extends CordovaPlugin{
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
-        gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
-        gertecPrinter.setConfigImpressao(configPrint);
-
     }
 
     public MainActivity() {
