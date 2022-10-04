@@ -42,6 +42,7 @@ import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.widget.Toast;
+import android.widget.TextView;
 
 //---------------------------------------------------------------
 public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
@@ -65,6 +66,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         private static final int END_STAGE_2_MSG = 3;
     }
     private int id;
+    private static TextView text;
 
 
 
@@ -118,6 +120,13 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
         if (action.equals("testePagamento")) {
             try{
+                String package_name = getApplication().getPackageName();
+                setContentView(getApplication().getResources().getIdentifier("pagamento", "layout", package_name));
+                int idTextView = getResources().getIdentifier("textStatus","id",package_name);
+                text = (TextView)findViewById(idTextView);
+                text.setText("TesteAplicação");
+
+                
                 this.cliSiTef = new CliSiTef(context);
                 this.cliSiTef.setMessageHandler(hndMessage);
                 this.cliSiTef.setDebug(true);
@@ -240,7 +249,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
 
-               /* Intent i = new Intent(this, Itens.class);
+                /*Intent i = new Intent(this, Itens.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 i.putExtra("request",RequestCode.GET_DATA);
