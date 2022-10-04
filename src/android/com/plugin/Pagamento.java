@@ -16,6 +16,9 @@ import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
 
 
 
@@ -177,12 +180,12 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             case CliSiTef.CMD_GET_MENU_OPTION: {
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
-               /* Intent i = new Intent(this, Itens.class);
+                Intent i = new Intent(this, Itens.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 i.putExtra("request",RequestCode.GET_DATA);
                 starActivityForResult.launch(i);
-                System.out.println(this.cliSiTef.getBuffer());*/
+                System.out.println(this.cliSiTef.getBuffer());
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
@@ -231,6 +234,27 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             }
         }
     }
+
+    ActivityResultLauncher<Intent> starActivityForResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->{
+                int code = result.getResultCode();
+                switch (code){
+                    case Activity.RESULT_OK:
+                        if(result.getData().getStringExtra("input")!=null){
+                            String returnClassItens = result.getData().getStringExtra("input");
+                            this.cliSiTef.continueTransaction(returnClassItens);
+                        }
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        int i = this.cliSiTef.abortTransaction(-1);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+    );
 
 
 }
