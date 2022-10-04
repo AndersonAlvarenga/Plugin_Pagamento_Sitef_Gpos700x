@@ -62,31 +62,31 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         public void handleMessage(android.os.Message message) {
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(true);
+                    //instance.setProgressBarIndeterminateVisibility(true);
                     instance.setStatus("Ativando BT");
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setProgressBarIndeterminateVisibility(false);
                     instance.setStatus("PinPad");
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(true);
+                    //instance.setProgressBarIndeterminateVisibility(true);
                     instance.setStatus("Aguardando pinpad");
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                    instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setProgressBarIndeterminateVisibility(false);
                     instance.setStatus("");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                    instance.setProgressBarIndeterminateVisibility(true);
+                    //instance.setProgressBarIndeterminateVisibility(true);
                     instance.setStatus("Configurando pinpad");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setProgressBarIndeterminateVisibility(false);
                     instance.setStatus("Pinpad configurado");
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                    instance.setProgressBarIndeterminateVisibility(false);
+                    //instance.setProgressBarIndeterminateVisibility(false);
                     instance.setStatus("Pinpad desconectado");
                     break;
             }
