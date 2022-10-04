@@ -271,7 +271,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     }
     private void alert(String message) {
         String mensagem = message;
-        Toast.makeText(this,mensagem,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,mensagem,Toast.LENGTH_LONG).show();
     }
     @Override
     public void onTransactionResult(int stage, int resultCode) {
@@ -286,7 +286,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         } else {
 
             if (resultCode == 0) {
-                finish();
+               
             } else {
 
             }
