@@ -205,7 +205,9 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         this.cliSiTef.continueTransaction(data);
     }
     private void setStatus(String s){
-        text.setText(s);
+        String t = s;
+        t = t;
+        //text.setText(s);
     }
     private void alert(String message) {
         String mensagem = message;
