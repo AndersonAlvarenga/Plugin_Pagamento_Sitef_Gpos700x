@@ -236,6 +236,6 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         }
     }
 
-   
+
 
 }

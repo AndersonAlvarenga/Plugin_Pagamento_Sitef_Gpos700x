@@ -41,6 +41,7 @@ import br.com.softwareexpress.sitef.android.CliSiTef;
 import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
+import android.widget.Toast;
 
 //---------------------------------------------------------------
 public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
@@ -121,7 +122,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 this.cliSiTef.setMessageHandler(hndMessage);
                 this.cliSiTef.setDebug(true);
                 int idConfig = this.cliSiTef.configure("10.0.213.78", "00000000", "pdvrd.90","TipoPinPad=Android_AUTO");
-                this.cliSiTef.setActivity(this);
+                this.cliSiTef.setActivity(cordova.getActivity());
                 int i = this.cliSiTef.startTransaction(this,110,"12","123456","20120514","120000","Teste","");
                 callbackContext.success("OK");
             }catch (Exception e){
