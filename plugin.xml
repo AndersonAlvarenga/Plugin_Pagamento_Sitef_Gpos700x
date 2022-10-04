@@ -23,20 +23,14 @@
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCGedi"></activity>
-        </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCId"></activity>
-        </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.CodigoBarras2"></activity>
-        </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.Pagamento"></activity>
         </config-file>
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
+
+        <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
 
         <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />
