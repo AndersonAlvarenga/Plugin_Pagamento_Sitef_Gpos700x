@@ -34,7 +34,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         private static final int END_STAGE_1_MSG = 2;
         private static final int END_STAGE_2_MSG = 3;
     }
-    private TextView text;
+    private static TextView text;
     private int id;
 
 
@@ -203,10 +203,10 @@ public class Pagamento extends Activity implements ICliSiTefListener{
 
         this.cliSiTef.continueTransaction(data);
     }
-    public void setStatus(String s){
+    public static void setStatus(String s){
         String t = s;
         t = t;
-        this.text.setText(s);
+        text.setText(s);
     }
     private void alert(String message) {
         String mensagem = message;
