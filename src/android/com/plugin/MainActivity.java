@@ -286,7 +286,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         } else {
 
             if (resultCode == 0) {
-               
+
             } else {
 
             }
