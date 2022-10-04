@@ -2,9 +2,6 @@
 repositories {
     google()
     jcenter()
-    maven {
-        url("$rootDir/../com/ts/auth-control-sdk/5.1.1")
-    }
     flatDir {
         dirs 'src/main/libs'
     }
@@ -15,6 +12,7 @@ android {
     packagingOptions {
         doNotStrip "**/libclisitef.so"
     }
+    enableJetifier=false
 }
 
 dependencies {
