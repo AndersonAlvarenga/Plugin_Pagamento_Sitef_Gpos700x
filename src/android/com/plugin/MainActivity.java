@@ -88,36 +88,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         this.callbackContext = callbackContext;
         intent = null;
 
-        if (action.equals("pagamento")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    intent = null;
-                    try {
-                        intent = new Intent(context, Pagamento.class);
-                        cordova.getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("checarPagamento")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = pag.checkPagemento();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
         if (action.equals("testePagamento")) {
             try{
                 String package_name = getApplication().getPackageName();
