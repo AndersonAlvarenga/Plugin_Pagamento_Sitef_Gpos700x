@@ -16,6 +16,7 @@ import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
+import android.support.annotation.Nullable;
 
 
 
