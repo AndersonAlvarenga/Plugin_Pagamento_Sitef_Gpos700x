@@ -35,26 +35,15 @@ import org.json.JSONException;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
+import com.plugin.Pagamento;
 
 //---------------------------------------------------------------
 public class MainActivity extends CordovaPlugin{
 
-    public static final String G700 = "GPOS700";
-    public static final String G800 = "Smart G800";
-    private static final String version = "RC03";
-    public static String Model = Build.MODEL;
-    private String resultado_Leitor;
-    private IntentIntegrator qrScan;
-    private IntentIntegrator qrScanv2;
-    private String titulo;
-    private String tipo;
-    private String status;
-    private String mensagem;
-    private ArrayList<String> arrayListTipo;
     private CallbackContext callbackContext;
-    private CallbackContext scancallbackContext;
     private Intent intent;
-    private int pulaLinha;
+    private Pagamento pag;
+    private String status;
 
 
 
@@ -62,6 +51,7 @@ public class MainActivity extends CordovaPlugin{
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
+        this.pag = new Pagamento();
     }
 
     public MainActivity() {
@@ -82,6 +72,20 @@ public class MainActivity extends CordovaPlugin{
                     try {
                         intent = new Intent(context, Pagamento.class);
                         cordova.getActivity().startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("checarPagamento")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = pag.checkPagemento();
+                        callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());

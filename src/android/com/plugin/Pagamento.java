@@ -16,9 +16,6 @@ import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
 import android.util.Log;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-
 
 
 
@@ -40,6 +37,10 @@ public class Pagamento extends Activity implements ICliSiTefListener{
     private static TextView text;
     private int id;
 
+    //Variaveis retorno;
+    private boolean consultaDisponivel = false;
+    private String textoRetonro="";
+    private String tela = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,9 +95,12 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             }
         }
     };
-
-
-
+    public String checkPagemento(){
+        if(consultaDisponivel){
+            return textoRetonro+"quebraLinha"+tela;
+        }
+        return "false";
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -108,7 +112,6 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         super.onResume();
     }
 
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -117,14 +120,11 @@ public class Pagamento extends Activity implements ICliSiTefListener{
     @Override
     public void onData(int stage, int command, int fieldId, int minLength, int maxLength, byte[] input) {
         String data = "";
-
-
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
         } else if (stage == 2) {
             // Evento onData recebido em uma finishTransaction
         }
-
         switch (command) {
             case CliSiTef.CMD_RESULT_DATA:
                 switch (fieldId) {
@@ -180,12 +180,12 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             case CliSiTef.CMD_GET_MENU_OPTION: {
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
-                Intent i = new Intent(this, Itens.class);
+               /* Intent i = new Intent(this, Itens.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 i.putExtra("request",RequestCode.GET_DATA);
-                starActivityForResult.launch(i);
-                System.out.println(this.cliSiTef.getBuffer());
+                cordova.getActivity().startActivityForResult(i);
+                System.out.println(this.cliSiTef.getBuffer());*/
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
@@ -234,27 +234,6 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             }
         }
     }
-
-    ActivityResultLauncher<Intent> starActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result ->{
-                int code = result.getResultCode();
-                switch (code){
-                    case Activity.RESULT_OK:
-                        if(result.getData().getStringExtra("input")!=null){
-                            String returnClassItens = result.getData().getStringExtra("input");
-                            this.cliSiTef.continueTransaction(returnClassItens);
-                        }
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        int i = this.cliSiTef.abortTransaction(-1);
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-    );
 
 
 }
