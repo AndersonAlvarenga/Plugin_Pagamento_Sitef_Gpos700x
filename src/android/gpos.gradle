@@ -1,8 +1,10 @@
 // Enable local dependencies repository
 repositories {
     google()
-    //jcenter ()
-    maven { url 'http://repo1.maven.org/maven2' }
+    jcenter()
+    maven {
+        url("$rootDir/../com/ts/auth-control-sdk/5.1.1")
+    }
     flatDir {
         dirs 'src/main/libs'
     }
@@ -12,12 +14,6 @@ repositories {
 android {
     packagingOptions {
         doNotStrip "**/libclisitef.so"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
 }
 
