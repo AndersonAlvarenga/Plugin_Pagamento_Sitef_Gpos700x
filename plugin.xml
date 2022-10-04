@@ -35,7 +35,7 @@
         <source-file src="src/android/com/plugin/ListMenu.java" target-dir="src/android/com/plugin" />
 
         <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/ListMenu.xml" target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/listmenu.xml" target-dir="res/layout"/>
         <source-file src="src/android/res/layout/menu_item.xml" target-dir="res/layout"/>
 
 
