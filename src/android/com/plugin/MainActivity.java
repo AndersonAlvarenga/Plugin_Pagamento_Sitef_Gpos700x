@@ -80,7 +80,8 @@ public class MainActivity extends CordovaPlugin{
                 public void run() {
                     intent = null;
                     try {
-
+                        intent = new Intent(context, Pagamento.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
