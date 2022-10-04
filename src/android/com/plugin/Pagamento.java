@@ -62,32 +62,31 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         public void handleMessage(android.os.Message message) {
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    //instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setStatus("Ativando BT");
+                    setStatus("Ativando BT");
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
                     //instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setStatus("PinPad");
+                    setStatus("PinPad");
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
                     //instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setStatus("Aguardando pinpad");
+                    setStatus("Aguardando pinpad");
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
                     //instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setStatus("");
+                    setStatus("");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
                     //instance.setProgressBarIndeterminateVisibility(true);
-                    instance.setStatus("Configurando pinpad");
+                    setStatus("Configurando pinpad");
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
                     //instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setStatus("Pinpad configurado");
+                    setStatus("Pinpad configurado");
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
                     //instance.setProgressBarIndeterminateVisibility(false);
-                    instance.setStatus("Pinpad desconectado");
+                    setStatus("Pinpad desconectado");
                     break;
             }
         }
@@ -204,7 +203,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
 
         this.cliSiTef.continueTransaction(data);
     }
-    private void setStatus(String s){
+    public static void setStatus(String s){
         String t = s;
         t = t;
         //text.setText(s);
