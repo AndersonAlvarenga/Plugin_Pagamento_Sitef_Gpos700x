@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 //imports Clisitef
 import br.com.softwareexpress.sitef.android.CliSiTef;
@@ -19,7 +20,7 @@ import android.util.Log;
 
 
 
-public class Pagamento extends Activity implements ICliSiTefListener{
+public class Pagamento extends AppCompatActivity implements ICliSiTefListener{
 
     //Variaveis Clisitef
     private CliSiTef cliSiTef;
@@ -181,12 +182,11 @@ public class Pagamento extends Activity implements ICliSiTefListener{
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
 
-               /* Intent i = new Intent(this, Itens.class);
+                Intent i = new Intent(this, ListMenu.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 i.putExtra("request",RequestCode.GET_DATA);
-                cordova.getActivity().startActivityForResult(i);
-                System.out.println(this.cliSiTef.getBuffer());*/
+                cordova.getActivity().startActivityForResult(i, 0);
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
@@ -234,6 +234,26 @@ public class Pagamento extends Activity implements ICliSiTefListener{
 
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if ((requestCode == MAIN_REQUEST_CODE.ACESSO_PENDENTE) ||
+                (requestCode == MAIN_REQUEST_CODE.REGISTRO_PENDENTE) ||
+                (requestCode == MAIN_REQUEST_CODE.RESGATE_IMPORTAR && data == null)) {
+        } else {
+
+        }
+
+    }
+
+    public static final class MAIN_REQUEST_CODE {
+
+        public static final int REGISTRO_PENDENTE = 0;
+        public static final int ACESSO_PENDENTE = 1;
+        public static final int RESGATE_IMPORTAR = 2;
+        public static final int CONFIGURACAO_SITEF = 3;
+
     }
 
 
