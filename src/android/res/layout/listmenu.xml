@@ -19,9 +19,7 @@
         android:layout_marginEnd="0dp"
         android:layout_weight="1"
         android:fastScrollAlwaysVisible="true"
-        android:fastScrollEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:fastScrollEnabled="true">
 
     </ListView>
 
@@ -37,10 +35,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
 
     <Button
         android:id="@+id/button"
