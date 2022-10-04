@@ -63,7 +63,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         private static final int END_STAGE_1_MSG = 2;
         private static final int END_STAGE_2_MSG = 3;
     }
-    private static TextView text;
     private int id;
 
 
@@ -118,7 +117,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
         if (action.equals("testePagamento")) {
             try{
-                this.cliSiTef = new CliSiTef(getApplicationContext());
+                this.cliSiTef = new CliSiTef(context);
                 this.cliSiTef.setMessageHandler(hndMessage);
                 this.cliSiTef.setDebug(true);
                 int idConfig = this.cliSiTef.configure("10.0.213.78", "00000000", "pdvrd.90","TipoPinPad=Android_AUTO");
@@ -130,7 +129,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 e.printStackTrace();
                 callbackContext.error("Erro " + e.getMessage());
             }
-           
+
             return true;
         }
 
@@ -268,7 +267,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     public static void setStatus(String s){
         String t = s;
         t = t;
-        text.setText(s);
     }
     private void alert(String message) {
         String mensagem = message;
