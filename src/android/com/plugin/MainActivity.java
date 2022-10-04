@@ -126,7 +126,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 text = (TextView)findViewById(idTextView);
                 text.setText("TesteAplicação");
 
-                
+
                 this.cliSiTef = new CliSiTef(context);
                 this.cliSiTef.setMessageHandler(hndMessage);
                 this.cliSiTef.setDebug(true);
