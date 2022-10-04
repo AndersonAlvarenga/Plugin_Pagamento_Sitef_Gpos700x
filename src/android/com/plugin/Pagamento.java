@@ -180,6 +180,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
             case CliSiTef.CMD_GET_MENU_OPTION: {
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
+
                /* Intent i = new Intent(this, Itens.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
@@ -247,7 +248,7 @@ public class Pagamento extends Activity implements ICliSiTefListener{
                         resultadoJson.put("Formato", this.tipo);
                     }
                     resultadoJson.put("Resultado", "Não foi possível ler o código");
-                    scancallbackContext.error(resultadoJson);  
+                    scancallbackContext.error(resultadoJson);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
