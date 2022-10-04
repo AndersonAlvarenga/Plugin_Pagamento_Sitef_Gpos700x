@@ -125,6 +125,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 this.cliSiTef.setActivity(cordova.getActivity());
                 int i = this.cliSiTef.startTransaction(this,110,"12","123456","20120514","120000","Teste","");
                 callbackContext.success("OK");
+                return "OK";
             }catch (Exception e){
                 Log.i("Erro",e.getMessage());
                 e.printStackTrace();
