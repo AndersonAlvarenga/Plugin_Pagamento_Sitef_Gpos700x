@@ -187,7 +187,7 @@ public class Pagamento extends AppCompatActivity implements ICliSiTefListener{
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 i.putExtra("request",RequestCode.GET_DATA);
-                cordova.getActivity().startActivityForResult(i, 0);
+                cordova.getActivity().startActivity(i);
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
