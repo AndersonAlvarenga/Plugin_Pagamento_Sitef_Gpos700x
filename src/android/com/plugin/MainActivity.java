@@ -128,7 +128,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             //Inicia biblioteca Clisitef
             try{
                 if(this.cliSiTef == null){
-                    this.cliSiTef = new CliSiTef(getApplicationContext());
+                    this.cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
                     this.cliSiTef.setMessageHandler(hndMessage);
                     this.cliSiTef.setDebug(true);
                     int idConfig = this.cliSiTef.configure(
