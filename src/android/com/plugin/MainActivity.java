@@ -253,7 +253,14 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
                 String ret = this.cliSiTef.getBuffer();
-                this.cliSiTef.continueTransaction(this.contFormaPagamento);
+                switch (this.title){
+                    case "Selecione a forma de pagamento":
+                        this.cliSiTef.continueTransaction(this.contFormaPagamento);
+                        break;
+                    case  "":
+                        break;
+                }
+
                 //seleciona o opção escolhida
 
 
