@@ -223,10 +223,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_CONFIRMATION: {
                 Log.i("OnData","CMD_CONFIRMATION");
                 String ret = this.cliSiTef.getBuffer();
-                /*Intent i = new Intent(this, yesno.class);
-                i.putExtra("title", title);
-                i.putExtra("message", this.cliSiTef.getBuffer());
-                starActivityForResult.launch(i);*/
+                int i = this.cliSiTef.abortTransaction(-1);
                 return;
             }
             case CliSiTef.CMD_GET_FIELD_CURRENCY:
@@ -277,8 +274,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         t = t;
     }
     private void alert(String message) {
-        String mensagem = message;
-        //Toast.makeText(this,mensagem,Toast.LENGTH_LONG).show();
+        String mensagem = message
     }
     @Override
     public void onTransactionResult(int stage, int resultCode) {
