@@ -138,7 +138,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                             "TipoPinPad=Android_AUTO");
 
                 }
-                this.cliSiTef.setActivity(this);
+                this.cliSiTef.setActivity(cordova.getActivity());
                 int i = this.cliSiTef.startTransaction(
                         this,
                         0,
