@@ -67,7 +67,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         private static final int END_STAGE_1_MSG = 2;
         private static final int END_STAGE_2_MSG = 3;
     }
-    private static TextView text;
     private int id;
 
 
