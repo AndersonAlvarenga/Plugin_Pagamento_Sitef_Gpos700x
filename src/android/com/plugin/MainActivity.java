@@ -53,7 +53,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private String status;
 
     //Variaveis Clisitef
-    private CliSiTef cliSiTef;
+    private static CliSiTef cliSiTef;
     private int trnResultCode;
     private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
     private static final int CAMPO_COMPROVANTE_ESTAB = 122;
