@@ -229,6 +229,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_CONFIRM_GO_BACK:
             case CliSiTef.CMD_CONFIRMATION: {
                 Log.i("OnData","CMD_CONFIRMATION");
+                String ret = this.cliSiTef.getBuffer();
                 /*Intent i = new Intent(this, yesno.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
@@ -240,6 +241,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_GET_FIELD_BARCODE:
             case CliSiTef.CMD_GET_FIELD: {
                 Log.i("OnData","CMD_GET_FIELD");
+                String ret = this.cliSiTef.getBuffer();
                 /*Intent i = new Intent(this, Dialog.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
@@ -250,6 +252,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_GET_MENU_OPTION: {
                 //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
+                String ret = this.cliSiTef.getBuffer();
                /* Intent i = new Intent(this, Itens.class);
                 i.putExtra("title", title);
                 i.putExtra("message", this.cliSiTef.getBuffer());
@@ -260,6 +263,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
                 Log.i("OnData","CMD_PRESS_ANY_KEY");
+                String ret = this.cliSiTef.getBuffer();
                /* Intent i = new Intent(this, mensagem.class);
                 i.putExtra("message", this.cliSiTef.getBuffer());
                 starActivityForResult.launch(i);*/
