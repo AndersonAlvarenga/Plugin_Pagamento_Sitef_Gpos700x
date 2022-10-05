@@ -9,5 +9,5 @@ exports.imprimir = function (params, success, error) {
 };
 
 exports.pagamento = function (params, success, error) {
-    exec(success, error, 'MainActivity', 'pagamento');
+    exec(success, error, 'MainActivity', 'pagamento', [params]);
 };
