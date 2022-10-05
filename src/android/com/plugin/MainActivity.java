@@ -90,22 +90,36 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
         if (action.equals("testePagamento")) {
             try{
-                String package_name = cordova.getActivity().getApplicationContext().getPackageName();
-                setContentView(getResources().getIdentifier("pagamento", "layout", package_name));
-                int idTextView = getResources().getIdentifier("textStatus","id",package_name);
-                text = (TextView)findViewById(idTextView);
+                cordova.getThreadPool().execute(new Runnable() {
+                    public void run() {
+                        try {
+                            this.cliSiTef = new CliSiTef(context);
+                            this.cliSiTef.setMessageHandler(hndMessage);
+                            this.cliSiTef.setDebug(true);
+                            int idConfig = this.cliSiTef.configure("10.0.213.78", "00000000", "pdvrd.90","TipoPinPad=Android_AUTO");
+                            this.cliSiTef.setActivity(cordova.getActivity());
+                            int i = this.cliSiTef.startTransaction(this,110,"12","123456","20120514","120000","Teste","");
+                            callbackContext.success("OK");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            callbackContext.error("Erro " + e.getMessage());
+                        }
+                    }
+                });
 
-                text.setText("TesteAplicação");
+            }catch (Exception e){
+                Log.i("Erro",e.getMessage());
+                e.printStackTrace();
+                callbackContext.error("Erro " + e.getMessage());
+            }
 
-
-                this.cliSiTef = new CliSiTef(context);
-                this.cliSiTef.setMessageHandler(hndMessage);
-                this.cliSiTef.setDebug(true);
-                int idConfig = this.cliSiTef.configure("10.0.213.78", "00000000", "pdvrd.90","TipoPinPad=Android_AUTO");
-                this.cliSiTef.setActivity(cordova.getActivity());
-                int i = this.cliSiTef.startTransaction(this,110,"12","123456","20120514","120000","Teste","");
-                callbackContext.success("OK");
-                return true;
+            return true;
+        }
+        if (action.equals("testeIntent")) {
+            try{
+                intent = new Intent(context, Pagamento.class);
+                intent.putExtra("input", "TestePutExtra");
+                cordova.getActivity().startActivity(intent);
             }catch (Exception e){
                 Log.i("Erro",e.getMessage());
                 e.printStackTrace();
