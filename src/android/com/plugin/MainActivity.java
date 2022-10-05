@@ -253,9 +253,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_PRESS_ANY_KEY: {
                 Log.i("OnData","CMD_PRESS_ANY_KEY");
                 String ret = this.cliSiTef.getBuffer();
-               /* Intent i = new Intent(this, mensagem.class);
-                i.putExtra("message", this.cliSiTef.getBuffer());
-                starActivityForResult.launch(i);*/
+                int i = this.cliSiTef.abortTransaction(-1);
                 return;
             }
             case CliSiTef.CMD_ABORT_REQUEST:
@@ -265,8 +263,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 Log.i("default","default");
                 break;
         }
-
-
         this.cliSiTef.continueTransaction(data);
     }
     public static void setStatus(String s){
