@@ -90,7 +90,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     //-------------------------------
     private String contFormaPagamento;
 
-
+    //Variaveis retorno Pagamento
+    private static String titulo;
+    private static String statusPagamento;
 
 
 
@@ -280,18 +282,16 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             try {
                 this.cliSiTef.finishTransaction(1);
             } catch (Exception e) {
-                //alert(e.getMessage());
+                Log.e("onTransactionResult",e.getMessage());
             }
         } else {
-
             if (resultCode == 0) {
-                //finish();
+                //Transação ok e pode exibir comprovante
             } else {
-
+                //Finaliza aplicação
             }
         }
     }
-
 
 
 }
