@@ -255,7 +255,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 String ret = this.cliSiTef.getBuffer();
                 switch (ret){
                     case "1:Cheque;2:Cartao de Debito;3:Cartao de Credito;4:Cartao Private Label;5:Confirmacao de Pre-autorizacao;":
-                        this.cliSiTef.continueTransaction(this.contFormaPagamento);
+                        data = this.contFormaPagamento;
                         break;
                     case  "":
                         break;
