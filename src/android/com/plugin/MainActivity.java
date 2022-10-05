@@ -192,9 +192,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_RESULT_DATA:
                 switch (fieldId) {
                     case CAMPO_COMPROVANTE_CLIENTE:
-                        Log.i("CAMPO_COMPROVANTE_CLIENTE","CAMPO_COMPROVANTE_CLIENTE");
+                        Log.i("CAMPO_COMPROVANTE_CLIENTE",this.cliSiTef.getBuffer());
                     case CAMPO_COMPROVANTE_ESTAB:
-                        Log.i("CAMPO_COMPROVANTE_ESTAB","CAMPO_COMPROVANTE_ESTAB");
+                        Log.i("CAMPO_COMPROVANTE_ESTAB",this.cliSiTef.getBuffer());
                         alert(this.cliSiTef.getBuffer());
                 }
                 break;
