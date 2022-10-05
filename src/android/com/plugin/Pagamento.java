@@ -235,51 +235,6 @@ public class Pagamento extends Activity implements ICliSiTefListener{
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        JSONObject resultadoJson = new JSONObject();
-        if (intentResult != null) {
-            //if qrcode has nothing in it
-            if (intentResult.getContents() == null) {
-                try {
-                    if(this.tipo != null) {
-                        resultadoJson.put("Formato", this.tipo);
-                    }
-                    resultadoJson.put("Resultado", "Não foi possível ler o código");
-                    scancallbackContext.error(resultadoJson);  
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                //if qr contains data
-                try {
-                    if(this.tipo != null) {
-                        resultadoJson.put("Formato", this.tipo);
-                        resultadoJson.put("Resultado", intentResult.getContents());
-                    } else {
-                        resultadoJson.put("Formato", data.getStringExtra("SCAN_RESULT_FORMAT"));
-                        resultadoJson.put("Resultado", data.getStringExtra("SCAN_RESULT"));
-                    }
-                    scancallbackContext.success(resultadoJson);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-            try {
-                if(this.tipo != null) {
-                    resultadoJson.put("Formato", this.tipo);
-                }
-                resultadoJson.put("Resultado", "Não foi possível fazer a leitura");
-                scancallbackContext.error(resultadoJson);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        this.tipo = null;
-    }
+   
 
 }
