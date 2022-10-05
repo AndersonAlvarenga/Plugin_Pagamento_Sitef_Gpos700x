@@ -274,7 +274,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         t = t;
     }
     private void alert(String message) {
-        String mensagem = message
+        String mensagem = message;
     }
     @Override
     public void onTransactionResult(int stage, int resultCode) {
