@@ -163,25 +163,25 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         public void handleMessage(android.os.Message message) {
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    android.widget.Toast.makeText(this,"Ativando BT", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"Ativando BT", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    android.widget.Toast.makeText(this,"PinPad", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"PinPad", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                    android.widget.Toast.makeText(this,"Aguardando pinpad", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"Aguardando pinpad", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                    android.widget.Toast.makeText(this,"", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                    android.widget.Toast.makeText(this,"Configurando pinpad", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"Configurando pinpad", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                    android.widget.Toast.makeText(this,"Pinpad configurado", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"Pinpad configurado", android.widget.Toast.LENGTH_SHORT).show();
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                    android.widget.Toast.makeText(this,"Pinpad desconectado", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(cordova.getActivity().getApplicationContext(),"Pinpad desconectado", android.widget.Toast.LENGTH_SHORT).show();
                     break;
             }
         }
