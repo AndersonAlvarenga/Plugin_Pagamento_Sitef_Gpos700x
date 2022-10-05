@@ -25,19 +25,12 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.Pagamento"></activity>
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.ListMenu"></activity>
-        </config-file>
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/ListMenu.java" target-dir="src/android/com/plugin" />
 
         <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/listmenu.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/menu_item.xml" target-dir="res/layout"/>
-
 
         <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />
