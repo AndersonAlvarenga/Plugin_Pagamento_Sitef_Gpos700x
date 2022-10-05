@@ -123,7 +123,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             this.startDataFiscal = params.getString("dataFiscal");
             this.startHorario = params.getString("horario");
             this.startOperador = params.getString("operador");
-            this.contFormaPagamento = params.getString("pagamento");
+            this.contFormaPagamento = params.getString("formaPagamento");
 
             //Inicia biblioteca Clisitef
             try{

@@ -8,6 +8,6 @@ exports.imprimir = function (params, success, error) {
     exec(success, error, 'MainActivity', 'imprimir', [params]);
 };
 
-exports.pagamento = function (success, error) {
+exports.pagamento = function (params, success, error) {
     exec(success, error, 'MainActivity', 'pagamento');
 };
