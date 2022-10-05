@@ -242,11 +242,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_GET_FIELD: {
                 Log.i("OnData","CMD_GET_FIELD");
                 String ret = this.cliSiTef.getBuffer();
-                /*Intent i = new Intent(this, Dialog.class);
-                i.putExtra("title", title);
-                i.putExtra("message", this.cliSiTef.getBuffer());
-                i.putExtra("request",RequestCode.GET_DATA);
-                starActivityForResult.launch(i);*/
+                this.cliSiTef.continueTransaction("");
                 return;
             }
             case CliSiTef.CMD_GET_MENU_OPTION: {
@@ -256,20 +252,13 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 switch (ret){
                     case "1:Cheque;2:Cartao de Debito;3:Cartao de Credito;4:Cartao Private Label;5:Confirmacao de Pre-autorizacao;":
                         data = this.contFormaPagamento;
+                        this.cliSiTef.continueTransaction(data);
                         break;
-                    case  "":
+                    default:
+                        data = "1";
+                        this.cliSiTef.continueTransaction(data);
                         break;
                 }
-
-                //seleciona o opção escolhida
-
-
-               /* Intent i = new Intent(this, Itens.class);
-                i.putExtra("title", title);
-                i.putExtra("message", this.cliSiTef.getBuffer());
-                i.putExtra("request",RequestCode.GET_DATA);
-                cordova.getActivity().startActivityForResult(i);
-                System.out.println(this.cliSiTef.getBuffer());*/
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
