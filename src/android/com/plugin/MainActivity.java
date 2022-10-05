@@ -91,10 +91,10 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if (action.equals("testePagamento")) {
             try{
                 String package_name = cordova.getActivity().getApplicationContext().getPackageName();
-                setContentView(cordova.getActivity().getApplicationContext().getResources().getIdentifier("pagamento", "layout", package_name));
-                int idTextView = cordova.getActivity().getApplicationContext().getResources().getIdentifier("textStatus","id",package_name);
+                setContentView(getResources().getIdentifier("pagamento", "layout", package_name));
+                int idTextView = getResources().getIdentifier("textStatus","id",package_name);
                 text = (TextView)findViewById(idTextView);
-                
+
                 text.setText("TesteAplicação");
 
 
