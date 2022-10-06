@@ -553,6 +553,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         } else {
             if (resultCode == 0) {
                 //Transação ok e pode exibir comprovante
+                String t = this.cliSiTef.getBuffer();
+                t=t
             } else {
                 //Finaliza aplicação
             }
