@@ -457,7 +457,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                         Log.i("CAMPO_COMPROVANTE_CLIENTE",this.cliSiTef.getBuffer());
                     case CAMPO_COMPROVANTE_ESTAB:
                         Log.i("CAMPO_COMPROVANTE_ESTAB",this.cliSiTef.getBuffer());
-                        alert(this.cliSiTef.getBuffer());
+                        imprimir(this.cliSiTef.getBuffer());
                 }
                 break;
             case CliSiTef.CMD_SHOW_MSG_CASHIER:
@@ -558,6 +558,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             }
         }
     }
-
+    private void imprimir(String texto){
+        this.impressão = texto;
+    }
 
 }
