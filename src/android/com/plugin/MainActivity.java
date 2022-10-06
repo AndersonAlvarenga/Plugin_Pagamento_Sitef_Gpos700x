@@ -107,7 +107,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     private int pulaLinha;
     private String mensagem;
-
+    private MainActivity main;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -159,7 +159,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                         }
                         cliSiTef.setActivity(cordova.getActivity());
                         int i = cliSiTef.startTransaction(
-                                this,
+                                main,
                                 0,
                                 startValor,
                                 startCupomFiscal,
