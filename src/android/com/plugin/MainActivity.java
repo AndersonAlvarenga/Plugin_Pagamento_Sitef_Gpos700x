@@ -60,7 +60,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private static final int CAMPO_COMPROVANTE_CLIENTE = 121;
     private static final int CAMPO_COMPROVANTE_ESTAB = 122;
     private static int REQ_CODE = 4321;
-    private static String title;
+
     private static MainActivity instance;
     private class RequestCode {
         private static final int GET_DATA = 1;
@@ -68,7 +68,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         private static final int END_STAGE_2_MSG = 3;
     }
     private int id;
-
+    private static String title;
 
     //Variaveis parametros entrada pagamento
 
@@ -155,6 +155,11 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 callbackContext.error("Erro " + e.getMessage());
             }
             callbackContext.success("PagamentoFinalizado");
+            return true;
+        }
+
+        if (action.equals("getTitulo")) {
+            callbackContext.success(title);
             return true;
         }
 

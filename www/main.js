@@ -1,7 +1,8 @@
 var exec = require('cordova/exec');
 
-exports.checarPagamento = function (success, error) {
-    exec(success, error, 'MainActivity', 'checarPagamento');
+
+exports.getTitulo = function (success, error) {
+    exec(success, error, 'MainActivity', 'getTitulo');
 };
 
 exports.imprimir = function (params, success, error) {
