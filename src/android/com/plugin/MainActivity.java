@@ -92,7 +92,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     //Variaveis retorno Pagamento
     private static String titulo;
-    private static String statusPagamento;
+    private String statusPagamento="";
 
 
 
@@ -159,7 +159,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
 
         if (action.equals("getTitulo")) {
-            callbackContext.success(title);
+            callbackContext.success(this.statusPagamento);
             return true;
         }
 
@@ -272,9 +272,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
         this.cliSiTef.continueTransaction(data);
     }
-    public static void setStatus(String s){
-        String t = s;
-        t = t;
+    public void setStatus(String s){
+        this.statusPagamento = s;
     }
     private void alert(String message) {
         String mensagem = message;
