@@ -105,6 +105,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private String statusPagamento="";
     private String impressão="";
 
+    private int pulaLinha;
+    private String mensagem;
 
 
     @Override
@@ -216,8 +218,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                             print.imprimeTexto(mensagem);
                             print.ImpressoraOutput();
                             break;
-                        case "TodasFuncoes":
-                            ImprimeTodasAsFucoes();
+                        default:
                             break;
                     }
                 }
