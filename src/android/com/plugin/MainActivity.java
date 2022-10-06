@@ -55,7 +55,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     private CallbackContext callbackContext;
     private Intent intent;
-    private Pagamento pag;
     private String status;
 
     private Beep beep;
