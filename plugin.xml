@@ -28,9 +28,11 @@
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/Pagamento.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/ConfigPrint.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Beep.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Led.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Printer.java" target-dir="src/android/com/plugin" />
 
-        <source-file src="src/android/res/layout/pagamento.xml" target-dir="res/layout"/>
 
         <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />

@@ -35,7 +35,13 @@ import org.json.JSONException;
 
 import static android.hardware.Camera.Parameters.FLASH_MODE_ON;
 
-import com.plugin.Pagamento;
+//Imports Gertec
+import com.plugin.Beep;
+import com.plugin.ConfigPrint;
+import com.plugin.Led;
+import com.plugin.Printer;
+//-----------------------------------------------------------
+
 
 //imports Clisitef
 import br.com.softwareexpress.sitef.android.CliSiTef;
@@ -51,6 +57,11 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private Intent intent;
     private Pagamento pag;
     private String status;
+
+    private Beep beep;
+    private Led led;
+    private Printer print;
+    private ConfigPrint configPrint = new ConfigPrint();
 
 
     //Implementação Clisitef passando os dados como Paramentro
@@ -93,6 +104,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     //Variaveis retorno Pagamento
     private static String titulo;
     private String statusPagamento="";
+    private String impressão="";
 
 
 
@@ -100,7 +112,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
-        this.pag = new Pagamento();
+        beep = new Beep(cordova.getActivity().getApplicationContext());
+        led = new Led(cordova.getActivity().getApplicationContext());
+        print = new Printer(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -113,7 +127,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         Context context = cordova.getActivity().getApplicationContext();
         this.callbackContext = callbackContext;
         intent = null;
-
+        //Metodos Pagamento
         if (action.equals("pagamento")) {
             //Seta valores recebidos as variaveis de configuração
             JSONObject params = args.getJSONObject(0);
@@ -157,9 +171,250 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             callbackContext.success("PagamentoFinalizado");
             return true;
         }
-
         if (action.equals("getTitulo")) {
             callbackContext.success(this.statusPagamento);
+            return true;
+        }
+        if(action.equals("GetStringImpressao")) {
+            callbackContext.success(this.impressão);
+            return true;
+        }
+
+        //Impressão
+        if (action.equals("checarImpressora")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = print.getStatusImpressora();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("imprimir")) {
+            try {
+                print.getStatusImpressora();
+                if (print.isImpressoraOK()) {
+                    JSONObject params = args.getJSONObject(0);
+                    String tipoImpressao = params.getString("tipoImpressao");
+
+                    switch (tipoImpressao) {
+                        case "Texto":
+                            mensagem = params.getString("mensagem");
+                            String alinhar = params.getString("alinhar");
+                            int size = params.getInt("size");
+                            String fontFamily = params.getString("font");
+                            Boolean opNegrito = params.getBoolean("opNegrito");
+                            Boolean opItalico = params.getBoolean("opItalico");
+                            Boolean opSublinhado = params.getBoolean("opSublinhado");
+
+                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
+                            print.imprimeTexto(mensagem);
+                            print.ImpressoraOutput();
+                            break;
+                        case "TodasFuncoes":
+                            ImprimeTodasAsFucoes();
+                            break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbackContext.error("Erro " + e.getMessage());
+            }
+            callbackContext.success("Adicionado ao buffer");
+            return true;
+        }
+        if (action.equals("impressoraOutput")) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        JSONObject params = args.getJSONObject(0);
+                        if (params.has("avancaLinha")) {
+                            pulaLinha = params.getInt("avancaLinha");
+                            print.avancaLinha(pulaLinha);
+                        }
+                        print.ImpressoraOutput();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                    callbackContext.success("Buffer impresso");
+                }
+            });
+            return true;
+        }
+
+        //Métodos Led
+        if (action.equals("ledOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledRedOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledRedOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledBlueOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledBlueOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledGreenOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledGreenOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledOrangeOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOrangeOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledRedOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledRedOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledBlueOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledBlueOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledGreenOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledGreenOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledOrangeOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOrangeOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+
+        //Metodo Beep
+        if (action.equals("beep")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = beep.beep();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
             return true;
         }
 
@@ -209,6 +464,15 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
             case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
                 Log.i("OnData","CMD_SHOW_MSG_CASHIER_CUSTOMER");
+                //Conectando Servidor
+                //Servidor Conectado
+                //Aproxime, insira ou passe o cartão
+                //Processando
+                //SELECIONADO: Debito Nubank
+                //Aguarde, em processamento...
+                //Aguarde, em processamento...(35)
+
+                //Transacao OK
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_SHOW_MENU_TITLE:
@@ -223,8 +487,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_CLEAR_MENU_TITLE:
             case CliSiTef.CMD_CLEAR_HEADER:
                 Log.i("OnData","CMD_CLEAR_HEADER");
-                this.setStatus("");
-                title = "";
                 break;
             case CliSiTef.CMD_CONFIRM_GO_BACK:
             case CliSiTef.CMD_CONFIRMATION: {
