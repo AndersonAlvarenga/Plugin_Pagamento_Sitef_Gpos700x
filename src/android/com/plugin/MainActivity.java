@@ -107,7 +107,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
     private int pulaLinha;
     private String mensagem;
-    private MainActivity main;
+
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -131,7 +131,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         //Metodos Pagamento
         if (action.equals("pagamento")) {
             //Seta valores recebidos as variaveis de configuração
-
             JSONObject params = args.getJSONObject(0);
             this.confIpSitef = params.getString("ipSitef");
             this.confCodigoLoja = params.getString("codigoLoja");
@@ -142,42 +141,35 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             this.startHorario = params.getString("horario");
             this.startOperador = params.getString("operador");
             this.contFormaPagamento = params.getString("formaPagamento");
+
             //Inicia biblioteca Clisitef
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        if(cliSiTef == null){
-                            cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
-                            cliSiTef.setMessageHandler(hndMessage);
-                            cliSiTef.setDebug(true);
-                            int idConfig = cliSiTef.configure(
-                                    confIpSitef,
-                                    confCodigoLoja,
-                                    confNumeroTerminal,
-                                    "TipoPinPad=Android_AUTO");
+            try{
+                if(this.cliSiTef == null){
+                    this.cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
+                    this.cliSiTef.setMessageHandler(hndMessage);
+                    this.cliSiTef.setDebug(true);
+                    int idConfig = this.cliSiTef.configure(
+                            this.confIpSitef,
+                            this.confCodigoLoja,
+                            this.confNumeroTerminal,
+                            "TipoPinPad=Android_AUTO");
 
-                        }
-                        cliSiTef.setActivity(cordova.getActivity());
-                        int i = cliSiTef.startTransaction(
-                                main,
-                                0,
-                                startValor,
-                                startCupomFiscal,
-                                startDataFiscal,
-                                startHorario,
-                                startOperador,
-                                "");
-                        callbackContext.success("OK");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
                 }
-            });
+                this.cliSiTef.setActivity(cordova.getActivity());
+                int i = this.cliSiTef.startTransaction(
+                        this,
+                        0,
+                        this.startValor,
+                        this.startCupomFiscal,
+                        this.startDataFiscal,
+                        this.startHorario,
+                        this.startOperador,
+                        "");
 
-
-
-
+            }catch (Exception e){
+                callbackContext.error("Erro " + e.getMessage());
+            }
+            callbackContext.success("PagamentoFinalizado");
             return true;
         }
         if (action.equals("getTitulo")) {
