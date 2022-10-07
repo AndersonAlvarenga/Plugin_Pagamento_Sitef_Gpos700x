@@ -10,6 +10,13 @@ exports.pagamento = function (params, success, error) {
 exports.GetStringImpressao = function (success, error) {
     exec(success, error, 'MainActivity', 'GetStringImpressao');
 };
+exports.limpaTransacao = function (success, error) {
+    exec(success, error, 'MainActivity', 'limpaTransacao');
+};
+exports.cancelarTransacao = function (success, error) {
+    exec(success, error, 'MainActivity', 'cancelarTransacao');
+};
+
 
 //Metodos Impressora
 exports.checarImpressora = function (success, error) {

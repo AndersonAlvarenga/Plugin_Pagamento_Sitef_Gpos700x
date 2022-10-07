@@ -207,6 +207,18 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             callbackContext.success("Transação Cancelada");
             return true;
         }
+        if(action.equals("limpaTransacao")) {
+            try{
+                this.cliSiTef=null;
+                this.titulo="";
+                this.statusPagamento="";
+                this.impressão="";
+            }catch (Exception e){
+                callbackContext.error(e.getMessage());
+            }
+            callbackContext.success("Transação Cancelada");
+            return true;
+        }
 
 
         //Impressão
