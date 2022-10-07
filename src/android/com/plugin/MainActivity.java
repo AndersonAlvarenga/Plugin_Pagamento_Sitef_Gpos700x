@@ -465,8 +465,11 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         String data = "";
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
+            Log.i("Stage2",this.cliSiTef.getBuffer());
         } else if (stage == 2) {
             // Evento onData recebido em uma finishTransaction
+            Log.i("Stage2",this.cliSiTef.getBuffer());
+
         }
         switch (command) {
             case CliSiTef.CMD_RESULT_DATA:
