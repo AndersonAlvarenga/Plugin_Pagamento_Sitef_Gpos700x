@@ -100,14 +100,27 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     //-------------------------------
     private String contFormaPagamento;
 
+    private int pulaLinha;
+    private String mensagem;
+
     //Variaveis retorno Pagamento
     private static String titulo;
     private String statusPagamento="";
     private String impressão="";
-
-    private int pulaLinha;
-    private String mensagem;
-
+    private String nsu;
+    private String nsuHost;
+    private String nomePortadorCartao;
+    private String autorizador;
+    private String tipoCartao;
+    private String codigoAprovacaoTransacaoCredito;
+    private String embosso;
+    private String dataValidadeCartao;
+    private String numeroCartao;
+    private String dataHoraTransacao;
+    private String codigoRedeAutorizadora;
+    private String nomeInstituicao;
+    private String codigoEstabelecimento;
+    private String modalidade;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -488,6 +501,54 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
+            //Tratamento Retorno cartao
+            switch (fieldId){
+                case 133:
+                    this.nsu = this.cliSiTef.getBuffer();
+                    break;
+                case 134:
+                    this.nsuHost = this.cliSiTef.getBuffer();
+                    break;
+                case 1003:
+                    this.nomePortadorCartao = this.cliSiTef.getBuffer();
+                    break;
+                case 131:
+                    this.autorizador = this.cliSiTef.getBuffer();
+                    break;
+                case 132:
+                    this.tipoCartao = this.cliSiTef.getBuffer();
+                    break;
+                case 135:
+                    this.codigoAprovacaoTransacaoCredito = this.cliSiTef.getBuffer();
+                    break;
+                case 1190:
+                    this.embosso = this.cliSiTef.getBuffer();
+                    break;
+                case 1002:
+                    this.dataValidadeCartao = this.cliSiTef.getBuffer();
+                    break;
+                case 2021:
+                    this.numeroCartao = this.cliSiTef.getBuffer();
+                    break;
+                case 105:
+                    this.dataHoraTransacao =this.cliSiTef.getBuffer();
+                    break;
+                case 158:
+                    this.codigoRedeAutorizadora =this.cliSiTef.getBuffer();
+                    break;
+                case 156:
+                    this.nomeInstituicao = this.cliSiTef.getBuffer();
+                    break;
+                case 157:
+                    this.codigoEstabelecimento = this.cliSiTef.getBuffer();
+                    break;
+                case 101:
+                    this.modalidade = this.cliSiTef.getBuffer();
+                    break;
+                default:
+                    break
+            }
+
         } else if (stage == 2) {
             // Evento onData recebido em uma finishTransaction
             Log.i("Stage2",this.cliSiTef.getBuffer());
