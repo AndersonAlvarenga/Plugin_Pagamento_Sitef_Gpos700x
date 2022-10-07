@@ -198,6 +198,16 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             callbackContext.success(this.impressão);
             return true;
         }
+        if(action.equals("cancelarTransacao")) {
+            try{
+                this.cliSiTef.abortTransaction(-1);
+            }catch (Exception e){
+                callbackContext.error(e.getMessage());
+            }
+            callbackContext.success("Transação Cancelada");
+            return true;
+        }
+
 
         //Impressão
         if (action.equals("checarImpressora")) {
