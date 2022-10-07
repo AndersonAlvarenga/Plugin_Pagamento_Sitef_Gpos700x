@@ -183,7 +183,15 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             return true;
         }
         if (action.equals("getTitulo")) {
-            callbackContext.success(this.statusPagamento);
+            new Thread(() -> {
+                callbackContext.success(this.statusPagamento);
+                try {
+                    new Thread().sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
             return true;
         }
         if(action.equals("GetStringImpressao")) {
