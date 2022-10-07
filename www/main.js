@@ -16,6 +16,9 @@ exports.limpaTransacao = function (success, error) {
 exports.cancelarTransacao = function (success, error) {
     exec(success, error, 'MainActivity', 'cancelarTransacao');
 };
+exports.GetDadosTransacao = function (success, error) {
+    exec(success, error, 'MainActivity', 'GetDadosTransacao');
+};
 
 
 //Metodos Impressora

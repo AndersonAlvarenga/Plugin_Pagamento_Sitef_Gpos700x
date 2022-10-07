@@ -232,6 +232,28 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             callbackContext.success("Transação Cancelada");
             return true;
         }
+        if(action.equals("GetDadosTransacao")) {
+            JSONObject jo = new JSONObject();
+            jo.put("statusPagamento", this.statusPagamento);
+            jo.put("impressão", this.impressão);
+            jo.put("nsu", this.nsu);
+            jo.put("nsuHost", this.nsuHost);
+            jo.put("nomePortadorCartao", this.nomePortadorCartao);
+            jo.put("autorizador", this.autorizador);
+            jo.put("tipoCartao", this.tipoCartao);
+            jo.put("codigoAprovacaoTransacaoCredito", this.codigoAprovacaoTransacaoCredito);
+            jo.put("embosso", this.embosso);
+            jo.put("dataValidadeCartao", this.dataValidadeCartao);
+            jo.put("numeroCartao", this.numeroCartao);
+            jo.put("dataHoraTransacao", this.dataHoraTransacao);
+            jo.put("codigoRedeAutorizadora", this.codigoRedeAutorizadora);
+            jo.put("nomeInstituicao", this.nomeInstituicao);
+            jo.put("codigoEstabelecimento", this.codigoEstabelecimento);
+            jo.put("modalidade", this.modalidade);
+
+            callbackContext.success(jo);
+            return true;
+        }
 
 
         //Impressão
