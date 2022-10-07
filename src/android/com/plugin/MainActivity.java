@@ -568,7 +568,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                     this.modalidade = this.cliSiTef.getBuffer();
                     break;
                 default:
-                    break
+                    break;
             }
 
         } else if (stage == 2) {
