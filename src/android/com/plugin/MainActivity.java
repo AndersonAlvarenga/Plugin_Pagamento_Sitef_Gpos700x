@@ -235,7 +235,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if(action.equals("GetDadosTransacao")) {
             JSONObject jo = new JSONObject();
             jo.put("statusPagamento", this.statusPagamento);
-            jo.put("impressão", this.impressão);
             jo.put("nsu", this.nsu);
             jo.put("nsuHost", this.nsuHost);
             jo.put("nomePortadorCartao", this.nomePortadorCartao);
