@@ -498,25 +498,25 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         public void handleMessage(android.os.Message message) {
             switch (message.what) {
                 case CliSiTefI.EVT_INICIA_ATIVACAO_BT:
-                    MainActivity.instance.statusPagamento ="Ativando BT";
+                    //MainActivity.instance.statusPagamento ="Ativando BT";
                     break;
                 case CliSiTefI.EVT_FIM_ATIVACAO_BT:
-                    MainActivity.instance.statusPagamento ="PinPad";
+                    //MainActivity.instance.statusPagamento ="PinPad";
                     break;
                 case CliSiTefI.EVT_INICIA_AGUARDA_CONEXAO_PP:
-                    MainActivity.instance.statusPagamento ="Aguardando pinpad";
+                    //MainActivity.instance.statusPagamento ="Aguardando pinpad";
                     break;
                 case CliSiTefI.EVT_FIM_AGUARDA_CONEXAO_PP:
-                    MainActivity.instance.statusPagamento ="";
+                    //MainActivity.instance.statusPagamento ="";
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURANDO:
-                    MainActivity.instance.statusPagamento ="Configurando pinpad";
+                    //MainActivity.instance.statusPagamento ="Configurando pinpad";
                     break;
                 case CliSiTefI.EVT_PP_BT_CONFIGURADO:
-                    MainActivity.instance.statusPagamento ="Pinpad configurado";
+                    //MainActivity.instance.statusPagamento ="Pinpad configurado";
                     break;
                 case CliSiTefI.EVT_PP_BT_DESCONECTADO:
-                    MainActivity.instance.statusPagamento ="Pinpad desconectado";
+                    //MainActivity.instance.statusPagamento ="Pinpad desconectado";
                     break;
             }
         }
