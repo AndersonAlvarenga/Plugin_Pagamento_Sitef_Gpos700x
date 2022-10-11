@@ -644,7 +644,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 Log.i("OnData","CMD_GET_FIELD");
                 setStatus(this.cliSiTef.getBuffer());
                 String ret = this.cliSiTef.getBuffer();
-                this.cliSiTef.continueTransaction("1");
+                this.cliSiTef.continueTransaction("");
                 return;
             }
             case CliSiTef.CMD_GET_MENU_OPTION: {
