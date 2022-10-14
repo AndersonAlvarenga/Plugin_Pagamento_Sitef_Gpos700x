@@ -593,10 +593,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 switch (fieldId) {
                     case CAMPO_COMPROVANTE_CLIENTE:
                         Log.i("CAMPO_COMPROVANTE_CLIENTE",this.cliSiTef.getBuffer());
-                        setStatus(this.cliSiTef.getBuffer());
                     case CAMPO_COMPROVANTE_ESTAB:
                         Log.i("CAMPO_COMPROVANTE_ESTAB",this.cliSiTef.getBuffer());
-                        setStatus(this.cliSiTef.getBuffer());
                         imprimir(this.cliSiTef.getBuffer());
                 }
                 break;
@@ -604,15 +602,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
             case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
                 Log.i("OnData","CMD_SHOW_MSG_CASHIER_CUSTOMER");
-                //Conectando Servidor
-                //Servidor Conectado
-                //Aproxime, insira ou passe o cartão
-                //Processando
-                //SELECIONADO: Debito Nubank
-                //Aguarde, em processamento...
-                //Aguarde, em processamento...(35)
-
-                //Transacao OK
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_SHOW_MENU_TITLE:
@@ -648,7 +637,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 return;
             }
             case CliSiTef.CMD_GET_MENU_OPTION: {
-                //Segunda entrada
                 Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
                 String ret = this.cliSiTef.getBuffer();
                 switch (ret){
@@ -702,8 +690,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             if (resultCode == 0) {
                 //Transação ok e pode exibir comprovante
                 setStatus(this.cliSiTef.getBuffer());
-                String t = this.cliSiTef.getBuffer();
-                t=t;
             } else {
                 //Finaliza aplicação
             }
