@@ -260,7 +260,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = print.getStatusImpressora();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -328,7 +327,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -343,7 +341,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -358,7 +355,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledRedOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -373,7 +369,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledBlueOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -388,7 +383,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledGreenOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -403,7 +397,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledOrangeOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -418,7 +411,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledRedOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -433,7 +425,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledBlueOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -448,7 +439,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledGreenOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -463,7 +453,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = led.ledOrangeOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -480,7 +469,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 public void run() {
                     try {
                         status = beep.beep();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
