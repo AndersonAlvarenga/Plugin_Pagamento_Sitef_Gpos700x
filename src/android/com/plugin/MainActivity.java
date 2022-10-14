@@ -134,11 +134,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     public MainActivity() {
         super();
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // cancelar a requisição
-    }
+
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -220,7 +216,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
                 new Thread(() -> {
                     int i = this.cliSiTef.abortTransaction(-1);
-
+                    this.cliSiTef.closePinPad();
                     this.titulo="";
                     this.statusPagamento="Transação Cancelada";
                     this.impressão="";
@@ -240,8 +236,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                     this.modalidade="";
 
                 }).start();
-
-            this.onDestroy();
+                
 
             }catch (Exception e){
                 callbackContext.error(e.getMessage());
