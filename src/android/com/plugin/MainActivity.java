@@ -213,31 +213,37 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
         if(action.equals("cancelarTransacao")) {
             try{
-                int i = this.cliSiTef.abortTransaction(-1);
-                try{
-                    this.cliSiTef.finishTransaction(1);
-                    this.cliSiTef = null;
-                }catch (Exception e){
-                    Log.e("ErroLog",e.getMessage());
-                }
 
-                this.titulo="";
-                this.statusPagamento="Transação Cancelada";
-                this.impressão="";
-                this.nsu="";
-                this.nsuHost="";
-                this.nomePortadorCartao="";
-                this.autorizador="";
-                this.tipoCartao="";
-                this.codigoAprovacaoTransacaoCredito="";
-                this.embosso="";
-                this.dataValidadeCartao="";
-                this.numeroCartao="";
-                this.dataHoraTransacao="";
-                this.codigoRedeAutorizadora="";
-                this.nomeInstituicao="";
-                this.codigoEstabelecimento="";
-                this.modalidade="";
+                new Thread(() -> {
+                    int i = this.cliSiTef.abortTransaction(-1);
+                    try{
+                        this.cliSiTef.finishTransaction(1);
+                        this.cliSiTef = null;
+                    }catch (Exception e){
+                        Log.e("ErroLog",e.getMessage());
+                    }
+
+                    this.titulo="";
+                    this.statusPagamento="Transação Cancelada";
+                    this.impressão="";
+                    this.nsu="";
+                    this.nsuHost="";
+                    this.nomePortadorCartao="";
+                    this.autorizador="";
+                    this.tipoCartao="";
+                    this.codigoAprovacaoTransacaoCredito="";
+                    this.embosso="";
+                    this.dataValidadeCartao="";
+                    this.numeroCartao="";
+                    this.dataHoraTransacao="";
+                    this.codigoRedeAutorizadora="";
+                    this.nomeInstituicao="";
+                    this.codigoEstabelecimento="";
+                    this.modalidade="";
+
+                }).start();
+
+
 
             }catch (Exception e){
                 callbackContext.error(e.getMessage());
