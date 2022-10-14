@@ -134,7 +134,11 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     public MainActivity() {
         super();
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // cancelar a requisição
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -237,7 +241,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
                 }).start();
 
-
+            this.onDestroy();
 
             }catch (Exception e){
                 callbackContext.error(e.getMessage());
