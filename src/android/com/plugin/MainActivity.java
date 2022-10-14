@@ -216,6 +216,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 int i = this.cliSiTef.abortTransaction(-1);
                 try{
                     this.cliSiTef.finishTransaction(1);
+                    this.cliSiTef = null;
                 }catch (Exception e){
                     Log.e("ErroLog",e.getMessage());
                 }
