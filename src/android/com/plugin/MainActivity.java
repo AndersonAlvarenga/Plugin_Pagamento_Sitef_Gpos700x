@@ -191,7 +191,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 }
             }).start();
             //Inicia biblioteca Clisitef
-
+            this.statusPagamento="Iniciando pagamento";
             callbackContext.success("PagamentoFinalizado");
             return true;
         }
