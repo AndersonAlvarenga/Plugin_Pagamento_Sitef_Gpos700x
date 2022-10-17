@@ -48,7 +48,7 @@ import br.com.softwareexpress.sitef.android.CliSiTef;
 import br.com.softwareexpress.sitef.android.CliSiTefI;
 import br.com.softwareexpress.sitef.android.ICliSiTefListener;
 import android.os.Handler;
-
+import br.com.gertec.ppcomp.PPComp;
 
 //---------------------------------------------------------------
 public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
@@ -217,7 +217,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 this.cliSiTef.continueTransaction("-1");
                 int i = this.cliSiTef.abortTransaction(-1);
                 this.onTransactionResult(1,0);
-
+                PPComp.getInstance(context).PP_Abort();
                 this.titulo="";
                 this.statusPagamento="Transação Cancelada";
                 this.impressão="";
