@@ -215,6 +215,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             try{
                 this.cliSiTef.continueTransaction("-1");
                 int i = this.cliSiTef.abortTransaction(-1);
+                cordova.getActivity().finish();
 
                 this.cliSiTef.closePinPad();
                 this.titulo="";
