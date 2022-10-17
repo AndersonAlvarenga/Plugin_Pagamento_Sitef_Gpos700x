@@ -134,7 +134,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     public MainActivity() {
         super();
     }
-
+    public void OnDestroy(){
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -215,6 +216,8 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             try{
                 this.cliSiTef.continueTransaction("-1");
                 int i = this.cliSiTef.abortTransaction(-1);
+                this.onTransactionResult(1,0);
+
                 this.titulo="";
                 this.statusPagamento="Transação Cancelada";
                 this.impressão="";
