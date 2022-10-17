@@ -215,7 +215,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             try{
                 this.cliSiTef.continueTransaction("-1");
                 int i = this.cliSiTef.abortTransaction(-1);
-                cordova.getActivity().finish();
 
                 this.cliSiTef.closePinPad();
                 this.titulo="";
@@ -612,7 +611,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_SHOW_MSG_CASHIER:
             case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
             case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
-                Log.i("OnData","CMD_SHOW_MSG_CASHIER_CUSTOMER");
+                Log.i("CMD_SHOW_MSG_CASHIER_CUSTOMER",this.cliSiTef.getBuffer());
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_SHOW_MENU_TITLE:
@@ -620,19 +619,19 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 //Primiro Entrada
                 title = this.cliSiTef.getBuffer();
                 setStatus(this.cliSiTef.getBuffer());
-                Log.i("OnData","CMD_SHOW_HEADER");
+                Log.i("CMD_SHOW_HEADER",this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_CLEAR_MSG_CASHIER:
             case CliSiTef.CMD_CLEAR_MSG_CUSTOMER:
             case CliSiTef.CMD_CLEAR_MSG_CASHIER_CUSTOMER:
             case CliSiTef.CMD_CLEAR_MENU_TITLE:
             case CliSiTef.CMD_CLEAR_HEADER:
-                Log.i("OnData","CMD_CLEAR_HEADER");
+                Log.i("CMD_CLEAR_HEADER",this.cliSiTef.getBuffer());
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_CONFIRM_GO_BACK:
             case CliSiTef.CMD_CONFIRMATION: {
-                Log.i("OnData","CMD_CONFIRMATION");
+                Log.i("CMD_CONFIRMATION",this.cliSiTef.getBuffer());
                 setStatus(this.cliSiTef.getBuffer());
                 String ret = this.cliSiTef.getBuffer();
                 int i = this.cliSiTef.abortTransaction(-1);
@@ -641,14 +640,14 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_GET_FIELD_CURRENCY:
             case CliSiTef.CMD_GET_FIELD_BARCODE:
             case CliSiTef.CMD_GET_FIELD: {
-                Log.i("OnData","CMD_GET_FIELD");
+                Log.i("CMD_GET_FIELD",this.cliSiTef.getBuffer());
                 setStatus(this.cliSiTef.getBuffer());
                 String ret = this.cliSiTef.getBuffer();
                 this.cliSiTef.continueTransaction("");
                 return;
             }
             case CliSiTef.CMD_GET_MENU_OPTION: {
-                Log.i("CMD_GET_MENU_OPTION","CMD_GET_MENU_OPTION");
+                Log.i("CMD_GET_MENU_OPTION",this.cliSiTef.getBuffer());
                 String ret = this.cliSiTef.getBuffer();
                 switch (ret){
                     case "1:Cheque;2:Cartao de Debito;3:Cartao de Credito;4:Cartao Private Label;5:Confirmacao de Pre-autorizacao;":
@@ -663,14 +662,14 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                 return;
             }
             case CliSiTef.CMD_PRESS_ANY_KEY: {
-                Log.i("OnData","CMD_PRESS_ANY_KEY");
+                Log.i("CMD_PRESS_ANY_KEY",this.cliSiTef.getBuffer());
                 String ret = this.cliSiTef.getBuffer();
                 int i = this.cliSiTef.abortTransaction(-1);
                 setStatus(this.cliSiTef.getBuffer());
                 return;
             }
             case CliSiTef.CMD_ABORT_REQUEST:
-                Log.i("OnData","CMD_ABORT_REQUEST");
+                Log.i("CMD_ABORT_REQUEST",this.cliSiTef.getBuffer());
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             default:
