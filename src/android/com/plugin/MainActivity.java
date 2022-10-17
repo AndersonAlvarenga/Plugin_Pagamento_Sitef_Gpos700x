@@ -545,7 +545,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
-            if(this.cliSiTef.getBuffer()=="70 - Modo Invalido. Retire e Passe o Cartao"){
+            if(this.cliSiTef.getBuffer().equals("70 - Modo Invalido. Retire e Passe o Cartao")){
                 this.cliSiTef.abortTransaction(-1);
             }
             //Tratamento Retorno cartao
