@@ -612,6 +612,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             case CliSiTef.CMD_SHOW_MSG_CUSTOMER:
             case CliSiTef.CMD_SHOW_MSG_CASHIER_CUSTOMER:
                 Log.i("CMD_SHOW_MSG_CASHIER_CUSTOMER",this.cliSiTef.getBuffer());
+                if(this.cliSiTef.getBuffer()=="70 - Modo Invalido. Retire e Passe o Cartao"){
+                    this.cliSiTef.abortTransaction(-1);
+                }
                 setStatus(this.cliSiTef.getBuffer());
                 break;
             case CliSiTef.CMD_SHOW_MENU_TITLE:
