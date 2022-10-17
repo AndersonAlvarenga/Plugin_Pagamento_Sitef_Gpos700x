@@ -213,9 +213,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
         if(action.equals("cancelarTransacao")) {
             try{
-                this.cliSiTef.continueTransaction("-1");
+                //this.cliSiTef.continueTransaction("-1");
                 int i = this.cliSiTef.abortTransaction(-1);
-
+                cordova.getActivity().onDestroy();
                 this.cliSiTef.closePinPad();
                 this.titulo="";
                 this.statusPagamento="Transação Cancelada";
@@ -545,9 +545,6 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
-            if(this.cliSiTef.getBuffer().equals("70 - Modo Invalido. Retire e Passe o Cartao")){
-                this.cliSiTef.abortTransaction(-1);
-            }
             //Tratamento Retorno cartao
             switch (fieldId){
                 case 133:
