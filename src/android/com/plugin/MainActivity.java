@@ -213,30 +213,28 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         }
         if(action.equals("cancelarTransacao")) {
             try{
+                this.cliSiTef.continueTransaction("-1");
+                int i = this.cliSiTef.abortTransaction(-1);
 
-                new Thread(() -> {
-                    int i = this.cliSiTef.abortTransaction(-1);
-                    this.cliSiTef.closePinPad();
-                    this.titulo="";
-                    this.statusPagamento="Transação Cancelada";
-                    this.impressão="";
-                    this.nsu="";
-                    this.nsuHost="";
-                    this.nomePortadorCartao="";
-                    this.autorizador="";
-                    this.tipoCartao="";
-                    this.codigoAprovacaoTransacaoCredito="";
-                    this.embosso="";
-                    this.dataValidadeCartao="";
-                    this.numeroCartao="";
-                    this.dataHoraTransacao="";
-                    this.codigoRedeAutorizadora="";
-                    this.nomeInstituicao="";
-                    this.codigoEstabelecimento="";
-                    this.modalidade="";
+                this.cliSiTef.closePinPad();
+                this.titulo="";
+                this.statusPagamento="Transação Cancelada";
+                this.impressão="";
+                this.nsu="";
+                this.nsuHost="";
+                this.nomePortadorCartao="";
+                this.autorizador="";
+                this.tipoCartao="";
+                this.codigoAprovacaoTransacaoCredito="";
+                this.embosso="";
+                this.dataValidadeCartao="";
+                this.numeroCartao="";
+                this.dataHoraTransacao="";
+                this.codigoRedeAutorizadora="";
+                this.nomeInstituicao="";
+                this.codigoEstabelecimento="";
+                this.modalidade="";
 
-                }).start();
-                
 
             }catch (Exception e){
                 callbackContext.error(e.getMessage());
