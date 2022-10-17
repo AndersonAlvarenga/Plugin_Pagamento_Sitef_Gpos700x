@@ -545,6 +545,9 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         if (stage == 1) {
             // Evento onData recebido em uma startTransaction
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
+            if(command == 3 && fieldId == -1){
+                this.cliSiTef.abortTransaction(-1);
+            }
             //Tratamento Retorno cartao
             switch (fieldId){
                 case 133:
