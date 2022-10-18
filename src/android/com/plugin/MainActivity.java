@@ -169,7 +169,45 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                                 this.confCodigoLoja,
                                 this.confNumeroTerminal,
                                 "TipoPinPad=Android_AUTO");
-
+                        if(idConfig!=0){
+                            switch (idConfig){
+                                case 1:
+                                    setStatus("Endereço IP inválido ou não resolvido");
+                                    break;
+                                case 2:
+                                    setStatus("Codigo da loja inválido.");
+                                    break;
+                                case 3:
+                                    setStatus("Código terminal inválido");
+                                    break;
+                                case 6:
+                                    setStatus("Erro na inicialização do Tcp/Ip");
+                                    break;
+                                case 7:
+                                    setStatus("Falta de memória");
+                                    break;
+                                case 8:
+                                    setStatus("Não encontrou a CliSiTef ou ela está com problemas");
+                                    break;
+                                case 9:
+                                    setStatus("Configuração de servidores SiTef foi excedida.");
+                                    break;
+                                case 10:
+                                    setStatus("Erro de acesso na pasta CliSiTef (possível falta de permissão para escrita).");
+                                    break;
+                                case 11:
+                                    setStatus("Dados inválidos passados pela automação.");
+                                    break;
+                                case 12:
+                                    setStatus("Modo seguro não ativo (possível falta de configuração no servidor SiTef do arquivo .cha).");
+                                    break;
+                                case 13:
+                                    setStatus("Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
                     this.cliSiTef.setActivity(cordova.getActivity());
                     retornoStartTransaction = this.cliSiTef.startTransaction(
