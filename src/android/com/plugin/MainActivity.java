@@ -207,6 +207,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                                 default:
                                     break;
                             }
+                            callbackContext.error("Erro configuração transação");
                         }
                     }
                     this.cliSiTef.setActivity(cordova.getActivity());
