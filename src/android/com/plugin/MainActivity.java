@@ -157,13 +157,14 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             this.contFormaPagamento = params.getString("formaPagamento");
 
             new Thread(() -> {
-
+                int idConfig = 0;
+                int retornoStartTransaction =0;
                 try{
                     if(this.cliSiTef == null){
                         this.cliSiTef = new CliSiTef(cordova.getActivity().getApplicationContext());
                         this.cliSiTef.setMessageHandler(hndMessage);
                         this.cliSiTef.setDebug(true);
-                        int idConfig = this.cliSiTef.configure(
+                        idConfig = this.cliSiTef.configure(
                                 this.confIpSitef,
                                 this.confCodigoLoja,
                                 this.confNumeroTerminal,
@@ -171,7 +172,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
 
                     }
                     this.cliSiTef.setActivity(cordova.getActivity());
-                    int i = this.cliSiTef.startTransaction(
+                    retornoStartTransaction = this.cliSiTef.startTransaction(
                             this,
                             0,
                             this.startValor,
@@ -180,6 +181,14 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                             this.startHorario,
                             this.startOperador,
                             "");
+                    if(retornoStartTransaction != 1000){
+                        callbackContext.error(
+                                    "Retorno startTransaction diferente de 10000. Código: "
+                                            + retornoStartTransaction
+                                            +"Configuracao = "
+                                            +idConfig
+                        );
+                    }
 
                 }catch (Exception e){
                     callbackContext.error("Erro " + e.getMessage());
