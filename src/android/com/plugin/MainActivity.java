@@ -121,6 +121,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private String nomeInstituicao;
     private String codigoEstabelecimento;
     private String modalidade;
+    private boolean isCancelado;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -155,7 +156,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             this.startHorario = params.getString("horario");
             this.startOperador = params.getString("operador");
             this.contFormaPagamento = params.getString("formaPagamento");
-
+            this.isCancelado = false;
             new Thread(() -> {
                 int idConfig = 0;
                 int retornoStartTransaction =0;
@@ -598,6 +599,15 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
             //Tratamento Retorno cartao
             switch (fieldId){
+                case -1:
+                    if(isCancelado){
+                        setStatus("Cartão removido");
+                    }else{
+                        if(this.cliSiTef.getBuffer().equals("Retire o cartao da leitora")){
+                            this.isCancelado = true;
+                        }
+                    }
+                    break;
                 case 133:
                     this.nsu = this.cliSiTef.getBuffer();
                     break;
