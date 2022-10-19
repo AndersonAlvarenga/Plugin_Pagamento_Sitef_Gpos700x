@@ -604,7 +604,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
                         this.statusPagamento = "Cartão removido";
 
                     }else{
-                        if(this.cliSiTef.getBuffer().equals("Retire o cartao da leitora")){
+                        if(this.cliSiTef.getBuffer().equals("13 - Operacao Cancelada")){
                             this.isCancelado = true;
                         }
                     }
