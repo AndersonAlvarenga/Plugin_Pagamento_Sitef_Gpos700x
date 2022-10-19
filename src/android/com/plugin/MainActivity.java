@@ -122,6 +122,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
     private String codigoEstabelecimento;
     private String modalidade;
     private boolean isCancelado;
+    private boolean isSolicitadoRemoverCartao;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -157,6 +158,7 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             this.startOperador = params.getString("operador");
             this.contFormaPagamento = params.getString("formaPagamento");
             this.isCancelado = false;
+            this.isSolicitadoRemoverCartao = false;
             new Thread(() -> {
                 int idConfig = 0;
                 int retornoStartTransaction =0;
@@ -599,16 +601,23 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
             Log.i("Stage1","Comando: "+command+" fieldId: "+fieldId+" "+this.cliSiTef.getBuffer());
             //Tratamento Retorno cartao
             switch (fieldId){
+                //Verifica se em caso de cancelamnto pelo pinpad o cartão foi retirado
+                //-------------------------------------------------------------------------
                 case -1:
-                    if(isCancelado){
+
+                    if(isCancelado && isSolicitadoRemoverCartao){
                         this.statusPagamento = "Cartão removido";
 
                     }else{
                         if(this.cliSiTef.getBuffer().equals("13 - Operacao Cancelada")){
                             this.isCancelado = true;
                         }
+                        if(this.cliSiTef.getBuffer().equals("Retire o cartao da leitora")){
+                            this.isSolicitadoRemoverCartao = true;
+                        }
                     }
                     break;
+                //--------------------------------------------------------------------------------
                 case 133:
                     this.nsu = this.cliSiTef.getBuffer();
                     break;
