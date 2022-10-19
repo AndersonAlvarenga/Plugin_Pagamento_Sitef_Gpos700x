@@ -742,7 +742,10 @@ public class MainActivity extends CordovaPlugin implements ICliSiTefListener{
         this.cliSiTef.continueTransaction(data);
     }
     public void setStatus(String s){
-        this.statusPagamento = s;
+        if(!s.equals("")){
+            this.statusPagamento = s;
+        }
+
     }
     private void alert(String message) {
         String mensagem = message;
